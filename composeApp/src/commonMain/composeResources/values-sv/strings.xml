@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Smart Recovery</string>
+    <string name="train_session">Övning Session</string>
+    <string name="test_session">Provningssession</string>
+    <string name="previous_sessions">Tidigare sessioner</string>
+    <string name="combined_force">kombinerad kraft</string>
+    <string name="test">provning</string>
+    <string name="save">Spara</string>
+    <string name="enter_the_new_sessions_name">Skriv in det nya sessionsnamnet</string>
+    <string name="name">namn</string>
+    <string name="Continue">fortsätta</string>
+    <string name="close">Stäng</string>
+    <string name="your_old_sessions">Dina gamla sessioner</string>
+    <string name="delete">Ta bort</string>
+    <string name="send_data_to_server">Skicka data till servern</string>
+    <string name="choose_which_devices_to_connect_to">Välj vilka enheter som ska anslutas till</string>
+    <string name="logo_name">Smart Recovery</string>
+    <string name="type_of_injury">Typ av skada:</string>
+    <string name="force_perentage">kraft %</string>
+    <string name="date_of_injury">Datum för skada:</string>
+    <string name="date_of_casting">Gjutningsdatum:</string>
+    <string name="edit_profile_data">Redigera profildata</string>
+    <string name="weight">vikt</string>
+    <string name="time_spent">Tidsåtgång</string>
+    <string name="force_peak">krafttopp</string>
+    <string name="total_force">total kraft</string>
+    <string name="total_steps">Totala steg</string>
+    <string name="stop_session">Stoppa session</string>
+    <string name="force">kraft %</string>
+    <string name="quick_menu">Menyn Snabb</string>
+    <string name="address_text">Adresstext</string>
+    <string name="name_text">namntext</string>
+    <string name="_1_week">1 vecka</string>
+    <string name="_1_month">1 månad</string>
+    <string name="all_time">hela behandlingstiden</string>
+    <string name="choose_the_type_of_your_injury">Välj typ av skada:</string>
+    <string name="choose_the_location_of_your_injury">Välj platsen för din skada:</string>
+    <string name="fracture">Fraktur:</string>
+    <string name="rupture">Upptrappning:</string>
+    <string name="injury_location">skadeplats</string>
+    <string name="please_put_in_your_profile_data">Vänligen lägg in dina profildata</string>
+    <string name="today">idag</string>
+    <string name="done">färdig</string>
+</resources>

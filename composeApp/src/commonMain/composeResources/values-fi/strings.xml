@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Smart Recovery</string>
+    <string name="train_session">Harjoitus Sessio</string>
+    <string name="test_session">Testi Sessio</string>
+    <string name="previous_sessions">Aiemmat Sessiot</string>
+    <string name="combined_force">Yhdistetty voima</string>
+    <string name="test">testi</string>
+    <string name="save">Tallenna</string>
+    <string name="enter_the_new_sessions_name">Kirjoita uuden session nimi</string>
+    <string name="name">Nimi</string>
+    <string name="Continue">Jatka</string>
+    <string name="close">Sulje</string>
+    <string name="your_old_sessions">Vanhat Sessiosi</string>
+    <string name="delete">Poista</string>
+    <string name="send_data_to_server">Lähetä tiedot palvelimelle</string>
+    <string name="choose_which_devices_to_connect_to">Valitse mihin laitteisiin yhdistäydyt</string>
+    <string name="logo_name">Smart Recovery</string>
+    <string name="type_of_injury">Loukkaantumisen tyyppi</string>
+    <string name="force_perentage">voima %</string>
+    <string name="date_of_injury">Loukkaantumisen päivämäärä:</string>
+    <string name="date_of_casting">Valauksen päivämäärä:</string>
+    <string name="edit_profile_data">Muokkaa profiilitietoja</string>
+    <string name="weight">Paino</string>
+    <string name="time_spent">kulunut aika</string>
+    <string name="force_peak">voiman huippu</string>
+    <string name="total_force">kokonaisvoima</string>
+    <string name="total_steps">askeleiden määrä</string>
+    <string name="stop_session">pysäytä sessio</string>
+    <string name="force">voima %</string>
+    <string name="quick_menu">pikavalikko</string>
+    <string name="address_text">osoite teksti</string>
+    <string name="name_text">nimi teksti</string>
+    <string name="_1_week">1 viikko</string>
+    <string name="_1_month">1 kuukausi</string>
+    <string name="all_time">koko hoitoaika</string>
+    <string name="choose_the_type_of_your_injury">Valitse vammasi tyyppi:</string>
+    <string name="choose_the_location_of_your_injury">Valitse loukkaantumispaikkasi:</string>
+    <string name="fracture">Murtuma:</string>
+    <string name="rupture">Rupture:</string>
+    <string name="injury_location">Loukkaantumispaikka</string>
+    <string name="please_put_in_your_profile_data">Ole hyvä ja syötä profiilitietosi</string>
+    <string name="today">tänään</string>
+    <string name="done">valmis</string>
+</resources>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SmartRecovery</string>
+    <string name="train_session">Trainingseinheit</string>
+    <string name="test_session">Testsitzung</string>
+    <string name="previous_sessions">Frühere Sessions</string>
+    <string name="combined_force">kombinierte Kraft</string>
+    <string name="test">testen</string>
+    <string name="save">Speichern</string>
+    <string name="enter_the_new_sessions_name">Geben Sie den Namen der neuen Sitzung ein</string>
+    <string name="name">Name</string>
+    <string name="Continue">Weiter</string>
+    <string name="close">Schliessen</string>
+    <string name="your_old_sessions">Deine alten Sessions</string>
+    <string name="delete">Löschen</string>
+    <string name="send_data_to_server">Daten an den Server senden</string>
+    <string name="choose_which_devices_to_connect_to">Wählen Sie aus, mit welchen Geräten Sie eine Verbindung herstellen möchten</string>
+    <string name="logo_name">Intelligente Wiederherstellung</string>
+    <string name="type_of_injury">Art der Verletzung:</string>
+    <string name="force_perentage">Kraft%</string>
+    <string name="date_of_injury">Datum der Verletzung:</string>
+    <string name="date_of_casting">Datum des Castings:</string>
+    <string name="edit_profile_data">Profildaten bearbeiten</string>
+    <string name="weight">Gewicht (kg)</string>
+    <string name="time_spent">aufgewendete Zeit</string>
+    <string name="force_peak">Kraftspitze</string>
+    <string name="total_force">Gesamtkraft</string>
+    <string name="total_steps">Schritte insgesamt</string>
+    <string name="stop_session">Sitzung beenden</string>
+    <string name="force">Kraft%</string>
+    <string name="quick_menu">Schnelles Menü</string>
+    <string name="address_text">adresstext</string>
+    <string name="name_text">Namenstext</string>
+    <string name="_1_week">1 Woche</string>
+    <string name="_1_month">1 Monat</string>
+    <string name="all_time">alle Zeiten</string>
+    <string name="choose_the_type_of_your_injury">Wählen Sie die Art Ihrer Verletzung:</string>
+    <string name="choose_the_location_of_your_injury">Wählen Sie den Ort Ihrer Verletzung:</string>
+    <string name="fracture">Fraktur:</string>
+    <string name="rupture">Bruch:</string>
+    <string name="injury_location">Ort der Verletzung</string>
+    <string name="please_put_in_your_profile_data">Bitte geben Sie Ihre Profildaten ein</string>
+    <string name="today">heute</string>
+    <string name="done">erledigt</string>
+</resources>
