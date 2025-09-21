@@ -27,6 +27,7 @@ class FileHandler
     }
 
     val parentDir = base / "sessions"
+    val profileDir = base / "profile"
 
     init {
         if (!FileSystem.SYSTEM.exists(parentDir)) {
@@ -34,10 +35,14 @@ class FileHandler
                 FileSystem.SYSTEM
                     .createDirectories(parentDir)
             }
-            catch (e: Exception) {
-
+            catch (e: Exception) { }
+        }
+        if (!FileSystem.SYSTEM.exists(profileDir)) {
+            try {
+                FileSystem.SYSTEM
+                    .createDirectories(profileDir)
             }
-
+            catch (e: Exception) { }
         }
     }
 
@@ -58,7 +63,6 @@ class FileHandler
             }
             .split("\n")
             .map { it.split(",") }
-
 
 
     /**
@@ -102,12 +106,20 @@ class FileHandler
         return try {
             Json.decodeFromBufferedSource<UserProfile>(
                 FileSystem.SYSTEM
-                    .source(parentDir / "userProfile.json".toPath())
+                    .source(profileDir / "userProfile.json".toPath())
                     .buffer()
             )
         }
         catch (e: Exception) {
             null
+        }
+    }
+
+    fun saveUserProfile(profile: UserProfile): Unit
+    {
+        FileSystem.SYSTEM
+            .write(profileDir / "userProfile.json".toPath()) {
+                writeUtf8(Json.encodeToString<UserProfile>(profile))
         }
     }
 }

@@ -42,4 +42,5 @@ class UserDataGetterViewModel : ViewModel()
     }
 
 
+    fun saveProfile(): Unit = fileHandler.saveUserProfile(profile.value)
 }

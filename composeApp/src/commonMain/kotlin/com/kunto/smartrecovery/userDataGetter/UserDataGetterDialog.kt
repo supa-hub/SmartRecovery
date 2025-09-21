@@ -61,8 +61,8 @@ fun <T : Any> UserDataGetterDialog(viewModel: UserDataGetterViewModel, navContro
 {
     val profile by viewModel.profile.collectAsState()
     var openAlertDialog by remember { mutableStateOf(true) }
-    var nameValue by remember { mutableStateOf("") }
-    var weightValue by remember { mutableStateOf("") }
+    var nameValue by remember { mutableStateOf(profile.userName) }
+    var weightValue by remember { mutableStateOf(profile.weight.toString()) }
     var sliderPosition by remember { mutableFloatStateOf(profile.amountOfForcePercentage.toFloat()) }
 
     // create a shared interactionSource for Slider, its Label, and its thumb component
@@ -102,11 +102,6 @@ fun <T : Any> UserDataGetterDialog(viewModel: UserDataGetterViewModel, navContro
                             .align(Alignment.CenterHorizontally)
                     )
 
-                    Text(
-                        text = "Alert dialog test",
-                        modifier = Modifier.padding(horizontal = 16.dp)
-                    )
-
                     OutlinedTextField(
                         value = nameValue,
                         onValueChange = {
@@ -116,7 +111,7 @@ fun <T : Any> UserDataGetterDialog(viewModel: UserDataGetterViewModel, navContro
                             .safeContentPadding()
                             .padding(top = 5.dp),
 
-                        label = { Text(if (profile.userName != "") profile.userName else stringResource(Res.string.name)) },
+                        label = { Text(stringResource(Res.string.name)) },
                     )
 
                     OutlinedTextField(
@@ -130,7 +125,7 @@ fun <T : Any> UserDataGetterDialog(viewModel: UserDataGetterViewModel, navContro
                         modifier = Modifier
                             .safeContentPadding()
                             .padding(top = 5.dp),
-                        label = { Text(if (profile.weight == 0) profile.weight.toString() else stringResource(Res.string.weight)) },
+                        label = { Text(stringResource(Res.string.weight)) },
                         keyboardOptions = KeyboardOptions(
                             keyboardType = KeyboardType.Number
                         )
@@ -143,80 +138,94 @@ fun <T : Any> UserDataGetterDialog(viewModel: UserDataGetterViewModel, navContro
                         verticalArrangement = Arrangement.Center,
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
-                        Text(
-                            text = stringResource(Res.string.force_perentage),
+                        Row(
                             modifier = Modifier
-                                .padding(horizontal = 15.dp)
-                                .padding(top = 5.dp)
-                        )
+                                .fillMaxWidth()
+                                .padding(horizontal = 20.dp),
+                            horizontalArrangement = Arrangement.SpaceBetween,
+                        ) {
 
-                        Slider(
-                            value = sliderPosition,
-                            onValueChange = {
-                                sliderPosition = it
-                                viewModel.updateProfile(
-                                    amountOfForcePercentage = it.toInt(),
-                                    maximumForceOnInjury = profile.weight * 9.81 * (it.toDouble() / 100.0)
-                                )
-                            },
-                            onValueChangeFinished = {
-                                Unit
-                            },
-                            modifier = Modifier
-                                .padding(horizontal = 25.dp)
-                                .padding(top = 5.dp),
-                            valueRange = 0F..100F,
-                            steps = 99,
-                            interactionSource = interactionSource,
-                            colors = SliderColors(
-                                thumbColor = Blue,
-                                activeTrackColor = Blue,
-                                activeTickColor = Transparent,
-                                inactiveTrackColor = LightBlue,
-                                inactiveTickColor = Transparent,
-                                disabledThumbColor = Transparent,
-                                disabledActiveTrackColor = LightBlue,
-                                disabledActiveTickColor = LightBlue,
-                                disabledInactiveTrackColor = LightBlue,
-                                disabledInactiveTickColor = LightBlue
-                            ),
-                            thumb = { sliderState ->
-                                Label(
-                                    label = { Text("${sliderState.value.toInt()}%") },
-                                    interactionSource = interactionSource,
-                                ) {
-                                    SliderDefaults.Thumb(
-                                        interactionSource = interactionSource
+
+                            Text(
+                                text = stringResource(Res.string.force_perentage),
+                                modifier = Modifier
+                                    .padding(top = 25.dp)
+                            )
+
+                            Slider(
+                                value = sliderPosition,
+                                onValueChange = {
+                                    sliderPosition = it
+                                    viewModel.updateProfile(
+                                        amountOfForcePercentage = it.toInt(),
+                                        maximumForceOnInjury = profile.weight * 9.81 * (it.toDouble() / 100.0)
+                                    )
+                                },
+                                onValueChangeFinished = {
+                                    Unit
+                                },
+                                modifier = Modifier
+                                    .padding(end = 25.dp, start = 10.dp)
+                                    .padding(top = 20.dp),
+                                valueRange = 0F..100F,
+                                steps = 99,
+                                interactionSource = interactionSource,
+                                colors = SliderColors(
+                                    thumbColor = Blue,
+                                    activeTrackColor = Blue,
+                                    activeTickColor = Transparent,
+                                    inactiveTrackColor = LightBlue,
+                                    inactiveTickColor = Transparent,
+                                    disabledThumbColor = Transparent,
+                                    disabledActiveTrackColor = LightBlue,
+                                    disabledActiveTickColor = LightBlue,
+                                    disabledInactiveTrackColor = LightBlue,
+                                    disabledInactiveTickColor = LightBlue
+                                ),
+                                thumb = { sliderState ->
+                                    Label(
+                                        label = { Text("${sliderState.value.toInt()}%") },
+                                        interactionSource = interactionSource,
+                                    ) {
+                                        SliderDefaults.Thumb(
+                                            interactionSource = interactionSource
+                                        )
+                                    }
+                                },
+                                track = { sliderState ->
+                                    SliderDefaults.Track(
+                                        sliderState = sliderState,
+                                        modifier = Modifier.height(32.dp),
+                                        colors = SliderColors(
+                                            thumbColor = Blue,
+                                            activeTrackColor = Blue,
+                                            activeTickColor = Blue,
+                                            inactiveTrackColor = LightBlue,
+                                            inactiveTickColor = Transparent,
+                                            disabledThumbColor = Transparent,
+                                            disabledActiveTrackColor = LightBlue,
+                                            disabledActiveTickColor = LightBlue,
+                                            disabledInactiveTrackColor = LightBlue,
+                                            disabledInactiveTickColor = LightBlue
+                                        ),
+                                        drawTick = { offset, color -> Unit }
                                     )
                                 }
-                            },
-                            track = { sliderState ->
-                                SliderDefaults.Track(
-                                    sliderState = sliderState,
-                                    modifier = Modifier.height(32.dp),
-                                    colors = SliderColors(
-                                        thumbColor = Blue,
-                                        activeTrackColor = Blue,
-                                        activeTickColor = Blue,
-                                        inactiveTrackColor = LightBlue,
-                                        inactiveTickColor = Transparent,
-                                        disabledThumbColor = Transparent,
-                                        disabledActiveTrackColor = LightBlue,
-                                        disabledActiveTickColor = LightBlue,
-                                        disabledInactiveTrackColor = LightBlue,
-                                        disabledInactiveTickColor = LightBlue
-                                    ),
-                                    drawTick = { offset, color -> Unit }
-                                )
-                            }
-                        )
+                            )
+                        }
                     }
 
-                    DatePickerDocked(stringResource(Res.string.date_of_injury)) {
+                    DatePickerDocked(stringResource(
+                        Res.string.date_of_injury),
+                        profile.dayOfInjury
+                    ) {
                         viewModel.updateProfile(dayOfInjury = it)
                     }
 
-                    DatePickerDocked(stringResource(Res.string.date_of_casting)) {
+                    DatePickerDocked(
+                        stringResource(Res.string.date_of_casting),
+                        profile.dayOfCasting
+                    ) {
                         viewModel.updateProfile(dayOfCasting = it)
                     }
 
@@ -237,6 +246,8 @@ fun <T : Any> UserDataGetterDialog(viewModel: UserDataGetterViewModel, navContro
                         Button(
                             onClick = {
                                 openAlertDialog = false
+                                viewModel.updateProfile(userName = nameValue, weight = weightValue.toIntOrNull() ?: 0)
+                                viewModel.saveProfile()
                                 println("Confirmation registered") // Add logic here to handle confirmation.
 
                                 navController.navigate(predecessor)

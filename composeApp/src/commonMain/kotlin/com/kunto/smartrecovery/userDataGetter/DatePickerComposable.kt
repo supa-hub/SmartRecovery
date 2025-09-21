@@ -28,6 +28,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Popup
+import kotlinx.datetime.LocalDate
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
 import org.jetbrains.compose.resources.stringResource
@@ -50,10 +51,10 @@ fun convertMillisToDate(millis: Long): String {
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalTime::class)
 @Composable
-fun DatePickerDocked(label: String, onValueChange: (String) -> Unit)
+fun DatePickerDocked(label: String, initialValue: String, onValueChange: (String) -> Unit)
 {
     var showDatePicker by remember { mutableStateOf(false) }
-    val datePickerState = rememberDatePickerState()
+    val datePickerState = rememberDatePickerState(initialSelectedDateMillis = LocalDate.parse(initialValue).toEpochDays() * 24 * 60 * 60 * 1000)
 
     val selectedDate = datePickerState.selectedDateMillis?.let {
         convertMillisToDate(it)
@@ -104,6 +105,7 @@ fun DatePickerDocked(label: String, onValueChange: (String) -> Unit)
                             .align(Alignment.End),
                         onClick = {
                             showDatePicker = false
+                            onValueChange(selectedDate)
                         }
                     ) {
                         Text(stringResource(Res.string.done))
