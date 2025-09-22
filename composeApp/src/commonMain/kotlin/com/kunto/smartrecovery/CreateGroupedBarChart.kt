@@ -46,7 +46,7 @@ fun CreateGroupedBarChart(data: List<GroupBar>) {
         lineColor = MaterialTheme.colorScheme.primary,
         labelColor = MaterialTheme.colorScheme.primary,
         labelFontSize = 16.sp,
-        labelFormatter = { index -> "${(index * (maxRange / yStepSize))} kg" }
+        labelFormatter = { index -> "${(index * (maxRange / yStepSize))} N" }
     )
 
     val colorPaletteList = getColorPaletteList1()
@@ -64,7 +64,7 @@ fun CreateGroupedBarChart(data: List<GroupBar>) {
     )
     Column(
         Modifier
-            .height(450.dp)
+            .height(480.dp)
             .width(400.dp)
             .padding(top = 30.dp)
     ) {

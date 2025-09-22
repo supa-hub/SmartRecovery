@@ -51,7 +51,10 @@ class CurrentSessionViewModel(private val userProfile: UserProfile) : ViewModel(
 
         val groupBar = GroupBar(barData.value.size.toString(), listOf(data))
 
-        barData.value += groupBar
+        _barData.update {
+            it += groupBar
+            it
+        }
     }
 
     fun <T : Number> updateProfile(value: T)
