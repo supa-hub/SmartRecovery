@@ -30,6 +30,7 @@ import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -70,6 +71,7 @@ import kotlin.time.ExperimentalTime
 fun AllSavedSessionsSideSheet(drawerState: DrawerState, viewModel: AllSessionsViewModel, content: @Composable () -> Unit) {
     val scope = rememberCoroutineScope()
     val listState = rememberLazyListState()
+    val allFiles by viewModel.allFiles.collectAsState()
 
     ModalNavigationDrawer(
         drawerState = drawerState,
@@ -96,7 +98,7 @@ fun AllSavedSessionsSideSheet(drawerState: DrawerState, viewModel: AllSessionsVi
                     LazyColumn(
                         state = listState
                     ) {
-                        items(viewModel.allSessionNames()) {
+                        items(allFiles) {
                             Row(
                                 modifier = Modifier
                                     .fillMaxWidth(),
@@ -129,8 +131,8 @@ fun AllSavedSessionsSideSheet(drawerState: DrawerState, viewModel: AllSessionsVi
                                     val sessionNamesWithFileNamesWithData: List<FileSessionData> =
                                         viewModel.chosenSessionNames
                                             .map { sessionName ->
-                                                val ok = sessionName.replace("r_combined_force_", "")
-                                                ok.takeWhile { it != '.' }
+                                                sessionName.replace("r_combined_force_", "")
+                                                    .takeWhile { it != '.' }
                                             }
                                             .map { name ->
                                                 FileSessionData(
@@ -163,6 +165,7 @@ fun AllSavedSessionsSideSheet(drawerState: DrawerState, viewModel: AllSessionsVi
                                     )
 
                                     val sent = SenderClient.sendData(payload)
+                                    println(sent.msg)
                                 }
                             }
                         ) {
@@ -177,7 +180,6 @@ fun AllSavedSessionsSideSheet(drawerState: DrawerState, viewModel: AllSessionsVi
                                 onClick = {
                                     scope.launch {
                                         viewModel.deleteChosen()
-                                        drawerState.close()
                                     }
                                 }
                             ) {

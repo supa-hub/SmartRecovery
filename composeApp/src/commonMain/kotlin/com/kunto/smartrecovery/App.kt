@@ -11,6 +11,7 @@ import com.kunto.smartrecovery.chooseDevicesPopUp.ChooseDevicesDialog
 import com.kunto.smartrecovery.currentSession.CurrentSessionPage
 import com.kunto.smartrecovery.currentSession.CurrentSessionViewModel
 import com.kunto.smartrecovery.mainPage.MainPage
+import com.kunto.smartrecovery.newSessionName.NewSessionNamePopUp
 import com.kunto.smartrecovery.permissions.PermissionPage
 import com.kunto.smartrecovery.permissions.PermissionsViewModel
 import com.kunto.smartrecovery.theming.MyApplicationTheme
@@ -63,6 +64,9 @@ fun App() {
                         )
                     }
                 }, navController, chooseBLEDevicesPopUp.sessionName)
+            }
+            composable<NewSessionName> {
+                NewSessionNamePopUp(navController, Main)
             }
             composable<RequestPermissions> { backStackEntry ->
                 val requestPermissions: RequestPermissions = backStackEntry.toRoute()

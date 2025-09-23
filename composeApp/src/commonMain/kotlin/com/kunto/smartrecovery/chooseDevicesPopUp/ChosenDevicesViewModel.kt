@@ -51,19 +51,22 @@ class ChooseBLEDevicesViewModel(private val currSessionAction: (CurrSessionDataP
             foundDevices.clear()
             chosenDevices.clear()
 
-            val devicesFlow = handler.listenToAdvertisements()
-            devicesFlow.collect {
-                val a = it
-                val b = a.manufacturerData?.data ?: byteArrayOf()
-                if (b.size > 3 && label_id(it.identifier.toString()) == 4695) {
-                    val c = a.peripheralName
-                    val d = a.name
+            try {
+                val devicesFlow = handler.listenToAdvertisements()
+                devicesFlow.collect {
+                    val a = it
+                    val b = a.manufacturerData?.data ?: byteArrayOf()
+                    if (b.size > 3 && label_id(it.identifier.toString()) == 4695) {
+                        val c = a.peripheralName
+                        val d = a.name
 
-                    if (!foundDevices.any { curr -> curr.identifier == it.identifier }) {
-                        foundDevices += it
+                        if (!foundDevices.any { curr -> curr.identifier == it.identifier }) {
+                            foundDevices += it
+                        }
                     }
                 }
             }
+            catch (e: Exception) { }
         }
 
     fun connectToDevices(advertisements: List<Advertisement>) =

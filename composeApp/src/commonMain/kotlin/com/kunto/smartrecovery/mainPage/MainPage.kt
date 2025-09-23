@@ -120,7 +120,7 @@ fun MainPage(navController: NavController, darkTheme: Boolean = isSystemInDarkTh
                     ) {
                         Button(
                             onClick = {
-                                navController.navigate(RequestPermissions(Route.ChooseBLEDevicesPopUp.ordinal))
+                                navController.navigate(RequestPermissions(Route.NewSessionName.ordinal))
                             },
                             modifier = Modifier
                                 .fillMaxWidth()

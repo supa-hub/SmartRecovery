@@ -1,15 +1,22 @@
 package com.kunto.smartrecovery.oldSessions
 
+import androidx.compose.runtime.collectAsState
 import androidx.lifecycle.ViewModel
 import com.juul.kable.PlatformAdvertisement
 import com.kunto.smartrecovery.backend.filehandling.FileHandler
 import com.kunto.smartrecovery.dataModels.files.FileSessionData
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 
 
 class AllSessionsViewModel : ViewModel()
 {
     val fileHandler = FileHandler()
     val chosenSessionNames = mutableListOf<String>()
+
+    private val _allFiles = MutableStateFlow(allSessionNames())
+    val allFiles = _allFiles.asStateFlow()
 
     fun allSessionNames(): List<String> = fileHandler.allFileNamesWithString("r_combined_force")
 
@@ -31,5 +38,7 @@ class AllSessionsViewModel : ViewModel()
     fun deleteChosen()
     {
         chosenSessionNames.forEach { fileHandler.deleteFile(it) }
+        chosenSessionNames.clear()
+        _allFiles.update { allSessionNames() }
     }
 }
