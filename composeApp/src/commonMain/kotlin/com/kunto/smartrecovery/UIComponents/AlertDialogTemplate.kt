@@ -1,4 +1,4 @@
-package com.kunto.smartrecovery
+package com.kunto.smartrecovery.UIComponents
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card

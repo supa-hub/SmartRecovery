@@ -1,4 +1,4 @@
-package com.kunto.smartrecovery
+package com.kunto.smartrecovery.UIComponents
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.height
@@ -7,14 +7,10 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.kunto.smartrecovery.mainPage.getColorPaletteList1
-import com.kunto.smartrecovery.mainPage.getGroupBarChartData
-import com.kunto.smartrecovery.mainPage.getLegendsLabelDataBarChart
 import network.chaintech.cmpcharts.axis.AxisProperties
-import network.chaintech.cmpcharts.common.model.LegendsConfig
 import network.chaintech.cmpcharts.ui.barchart.GroupBarChart
 import network.chaintech.cmpcharts.ui.barchart.config.BarChartStyle
 import network.chaintech.cmpcharts.ui.barchart.config.BarPlotData

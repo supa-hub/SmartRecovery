@@ -36,7 +36,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.kunto.smartrecovery.AlertDialogTemplate
+import com.kunto.smartrecovery.UIComponents.AlertDialogTemplate
 import com.kunto.smartrecovery.theming.Blue
 import com.kunto.smartrecovery.theming.LightBlue
 import com.kunto.smartrecovery.theming.Transparent
@@ -47,7 +47,6 @@ import smartrecovery.composeapp.generated.resources.Res
 import smartrecovery.composeapp.generated.resources.close
 import smartrecovery.composeapp.generated.resources.date_of_casting
 import smartrecovery.composeapp.generated.resources.date_of_injury
-import smartrecovery.composeapp.generated.resources.delete
 import smartrecovery.composeapp.generated.resources.force_perentage
 import smartrecovery.composeapp.generated.resources.light_mode_person_24
 import smartrecovery.composeapp.generated.resources.name

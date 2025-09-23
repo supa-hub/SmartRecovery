@@ -30,11 +30,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.kunto.smartrecovery.CreateGroupedBarChart
-import com.kunto.smartrecovery.DropdownMenu
+import com.kunto.smartrecovery.UIComponents.CreateGroupedBarChart
+import com.kunto.smartrecovery.UIComponents.DropdownMenu
 import com.kunto.smartrecovery.Main
 import com.kunto.smartrecovery.chooseDevicesPopUp.ChooseBLEDevicesViewModel
-import com.kunto.smartrecovery.mainPage.MainGroupedBarChart
 import com.kunto.smartrecovery.theming.Blue
 import com.kunto.smartrecovery.theming.LightBlue
 import com.kunto.smartrecovery.theming.Transparent

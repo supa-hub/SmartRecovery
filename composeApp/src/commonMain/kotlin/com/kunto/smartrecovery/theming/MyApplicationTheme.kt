@@ -1,9 +1,4 @@
-package com.kunto.smartrecovery
-
-import androidx.compose.foundation.background
-import com.kunto.smartrecovery.theming.Blue
-import com.kunto.smartrecovery.theming.LightBlue
-import com.kunto.smartrecovery.theming.White
+package com.kunto.smartrecovery.theming
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -14,14 +9,11 @@ import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.BeyondBoundsLayout
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.kunto.smartrecovery.theming.Black
-import com.kunto.smartrecovery.theming.backgroundColorDark
 
 
 @Composable

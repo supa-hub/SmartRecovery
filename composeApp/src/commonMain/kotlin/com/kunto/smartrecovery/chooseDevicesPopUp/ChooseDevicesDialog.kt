@@ -2,7 +2,6 @@ package com.kunto.smartrecovery.chooseDevicesPopUp
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -18,40 +17,28 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.kunto.smartrecovery.AlertDialogTemplate
+import com.kunto.smartrecovery.UIComponents.AlertDialogTemplate
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
-import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.juul.kable.PlatformAdvertisement
 import com.kunto.smartrecovery.CurrentSession
-import com.kunto.smartrecovery.IconButton
-import com.kunto.smartrecovery.RequestPermissions
-import com.kunto.smartrecovery.Route
-import com.kunto.smartrecovery.currentSession.CurrentSessionViewModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.launch
+import com.kunto.smartrecovery.UIComponents.IconButton
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.resources.vectorResource
 import smartrecovery.composeapp.generated.resources.Continue
 import smartrecovery.composeapp.generated.resources.Res
 import smartrecovery.composeapp.generated.resources.baseline_add_24
-import smartrecovery.composeapp.generated.resources.your_old_sessions
 
 
 @Composable
