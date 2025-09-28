@@ -9,6 +9,7 @@ import platform.posix.PATH_MAX
 import platform.posix.getcwd
 import platform.Foundation.NSSearchPathForDirectoriesInDomains
 import platform.Foundation.NSDocumentDirectory
+import platform.Foundation.NSLog
 import platform.Foundation.NSUserDomainMask
 
 
@@ -25,6 +26,10 @@ class IOSPlatform: Platform {
         val paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, true)
         paths.first() as String
     }.toPath(normalize = true)
+
+    override fun log(text: String) {
+        NSLog(text)
+    }
 }
 
 actual fun getPlatform(): Platform = IOSPlatform()

@@ -3,6 +3,7 @@ package com.kunto.smartrecovery.currentSession
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.lifecycle.ViewModel
+import com.kunto.smartrecovery.bluetooth.ConnectionHandler
 import com.kunto.smartrecovery.dataModels.CurrSessionDataPacket
 import com.kunto.smartrecovery.json.UserProfile
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -23,7 +24,7 @@ data class SessionUiState(
     val chartYValues: SnapshotStateList<Float> = mutableStateListOf()
 )
 
-class CurrentSessionViewModel(private val userProfile: UserProfile) : ViewModel()
+class CurrentSessionViewModel(private val userProfile: UserProfile, private val connectionHandler: ConnectionHandler) : ViewModel()
 {
     private val _uiState = MutableStateFlow<SessionUiState>(SessionUiState())
     private val _barData = MutableStateFlow<MutableList<GroupBar>>(mutableListOf())
@@ -73,5 +74,7 @@ class CurrentSessionViewModel(private val userProfile: UserProfile) : ViewModel(
                 timeSpent = 0
             )
         }
+
+        connectionHandler.disconnectAll()
     }
 }

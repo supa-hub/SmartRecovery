@@ -6,6 +6,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
+import com.kunto.smartrecovery.bluetooth.ConnectionHandler
 import com.kunto.smartrecovery.chooseDevicesPopUp.ChooseBLEDevicesViewModel
 import com.kunto.smartrecovery.chooseDevicesPopUp.ChooseDevicesDialog
 import com.kunto.smartrecovery.currentSession.CurrentSessionPage
@@ -31,11 +32,12 @@ fun App() {
         val navController = rememberNavController()
 
         val factory: PermissionsControllerFactory = rememberPermissionsControllerFactory()
-        val controller: PermissionsController =
-            remember(factory) { factory.createPermissionsController() }
+        val controller: PermissionsController = remember(factory) { factory.createPermissionsController() }
         BindEffect(controller)
+
+        val handler = remember { ConnectionHandler() }
         val userProfile by viewModel { UserDataGetterViewModel() }.profile.collectAsState()
-        val currSession = viewModel { CurrentSessionViewModel(userProfile) }
+        val currSession = viewModel { CurrentSessionViewModel(userProfile, handler) }
 
         NavHost(
             navController = navController,
@@ -47,7 +49,7 @@ fun App() {
             composable<CurrentSession> {
                 CurrentSessionPage(
                     currSession,
-                    viewModel { ChooseBLEDevicesViewModel { currSession.updateValues(it) } },
+                    viewModel { ChooseBLEDevicesViewModel(handler) { currSession.updateValues(it) } },
                     navController
                 )
             }
@@ -58,7 +60,7 @@ fun App() {
                 val chooseBLEDevicesPopUp: ChooseBLEDevicesPopUp = backStackEntry.toRoute()
 
                 ChooseDevicesDialog(viewModel {
-                    ChooseBLEDevicesViewModel {
+                    ChooseBLEDevicesViewModel(handler) {
                         currSession.updateValues(
                             it
                         )

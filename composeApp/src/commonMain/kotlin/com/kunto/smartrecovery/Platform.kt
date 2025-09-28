@@ -7,6 +7,7 @@ interface Platform {
     fun isAndroid(): Boolean
     fun isIOS(): Boolean
     fun cwd(): Path
+    fun log(text: String): Unit
 }
 
 expect fun getPlatform(): Platform

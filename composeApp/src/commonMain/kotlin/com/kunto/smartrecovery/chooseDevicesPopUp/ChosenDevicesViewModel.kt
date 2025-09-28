@@ -6,6 +6,9 @@ import androidx.compose.runtime.mutableStateSetOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.testing_2.backend.bluetoothDecoding.adv
+import com.example.testing_2.backend.bluetoothDecoding.adv_force
+import com.example.testing_2.backend.bluetoothDecoding.ble
+import com.example.testing_2.backend.bluetoothDecoding.decode_adv
 import com.example.testing_2.backend.bluetoothDecoding.label_id
 import com.juul.kable.Advertisement
 import com.juul.kable.Peripheral
@@ -14,6 +17,7 @@ import com.kunto.smartrecovery.backend.filehandling.FileHandler
 import com.kunto.smartrecovery.bluetooth.ConnectionHandler
 import com.kunto.smartrecovery.currentSession.CurrentSessionViewModel
 import com.kunto.smartrecovery.dataModels.CurrSessionDataPacket
+import com.kunto.smartrecovery.getPlatform
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
@@ -32,12 +36,11 @@ import okio.SYSTEM
 import okio.buffer
 
 @OptIn(kotlin.uuid.ExperimentalUuidApi::class)
-class ChooseBLEDevicesViewModel(private val currSessionAction: (CurrSessionDataPacket) -> Unit) : ViewModel()
+class ChooseBLEDevicesViewModel(private val handler: ConnectionHandler, private val currSessionAction: (CurrSessionDataPacket) -> Unit) : ViewModel()
 {
     companion object {
         val fileHandler = FileHandler()
     }
-    private val handler = ConnectionHandler()
     val foundDevices = mutableStateListOf<PlatformAdvertisement>()
     val chosenDevices = mutableListOf<PlatformAdvertisement>()
 
@@ -51,22 +54,32 @@ class ChooseBLEDevicesViewModel(private val currSessionAction: (CurrSessionDataP
             foundDevices.clear()
             chosenDevices.clear()
 
-            try {
+
                 val devicesFlow = handler.listenToAdvertisements()
                 devicesFlow.collect {
-                    val a = it
-                    val b = a.manufacturerData?.data ?: byteArrayOf()
-                    if (b.size > 3 && label_id(it.identifier.toString()) == 4695) {
-                        val c = a.peripheralName
-                        val d = a.name
+                    try {
+                        val a = it
+                        val b = a.manufacturerData?.data ?: byteArrayOf()
 
-                        if (!foundDevices.any { curr -> curr.identifier == it.identifier }) {
-                            foundDevices += it
+
+                        val testBle = ble(adv_force = adv_force(0, 0, 0, 0, 0, 0, 0, 0))
+                        val testAdv = adv(0u, testBle)
+                        val test = decode_adv(b.map { it.toInt() and 0xFF }.toIntArray(), testAdv)
+
+                        getPlatform().log(testAdv.ble.toString())
+                        getPlatform().log(it.identifier.toString())
+                        if (b.size > 3 && (label_id(it.identifier.toString()) == 4695  || it.identifier.toString() == "de10a0a6-4cfd-5bfe-189a-f35492cab6ed")) {
+                            val c = a.peripheralName
+                            val d = a.name
+
+                            if (!foundDevices.any { curr -> curr.identifier == it.identifier }) {
+                                foundDevices += it
+                            }
                         }
                     }
+                    catch (e: Exception) { }
                 }
-            }
-            catch (e: Exception) { }
+
         }
 
     fun connectToDevices(advertisements: List<Advertisement>) =

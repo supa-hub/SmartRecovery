@@ -121,4 +121,18 @@ class ConnectionHandler {
                 }
             }
         }
+
+
+    fun disconnectAll()
+    {
+        chosenPeripherals.dropWhile {
+            try {
+                it.close()
+                true
+            }
+            catch (e: Exception) {
+                false
+            }
+        }
+    }
 }

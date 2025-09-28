@@ -10,10 +10,6 @@
 	<string>Used for receiving sensor data</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Requires with bluetooth for receiving sensor data</string>
-	<key>NSBluetoothServices</key>
-	<array>
-		<string>Used for receiving sensor data</string>
-	</array>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>Used with bluetooth to connect and receive data from sensor</string>
 	<key>CADisableMinimumFrameDurationOnPhone</key>

@@ -30,6 +30,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Popup
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.TimeZone
+import kotlinx.datetime.TimeZone.Companion.UTC
 import kotlinx.datetime.toLocalDateTime
 import org.jetbrains.compose.resources.stringResource
 import smartrecovery.composeapp.generated.resources.Res
@@ -37,6 +38,7 @@ import smartrecovery.composeapp.generated.resources.close
 import smartrecovery.composeapp.generated.resources.date_of_injury
 import smartrecovery.composeapp.generated.resources.done
 import smartrecovery.composeapp.generated.resources.weight
+import kotlin.time.Clock
 import kotlin.time.ExperimentalTime
 import kotlin.time.Instant
 
@@ -53,8 +55,9 @@ fun convertMillisToDate(millis: Long): String {
 @Composable
 fun DatePickerDocked(label: String, initialValue: String, onValueChange: (String) -> Unit)
 {
+    val initial = initialValue.ifEmpty { Clock.System.now().toLocalDateTime(UTC).date.toString() }
     var showDatePicker by remember { mutableStateOf(false) }
-    val datePickerState = rememberDatePickerState(initialSelectedDateMillis = LocalDate.parse(initialValue).toEpochDays() * 24 * 60 * 60 * 1000)
+    val datePickerState = rememberDatePickerState(initialSelectedDateMillis = LocalDate.parse(initial).toEpochDays() * 24 * 60 * 60 * 1000)
 
     val selectedDate = datePickerState.selectedDateMillis?.let {
         convertMillisToDate(it)

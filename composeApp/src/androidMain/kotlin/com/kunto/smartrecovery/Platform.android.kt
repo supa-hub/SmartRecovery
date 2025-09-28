@@ -2,6 +2,7 @@ package com.kunto.smartrecovery
 
 import android.content.Context
 import android.os.Build
+import android.util.Log
 import androidx.annotation.RequiresApi
 import okio.ByteString
 import okio.ByteString.Companion.encodeUtf8
@@ -20,6 +21,9 @@ class AndroidPlatform : Platform {
     override fun isAndroid(): Boolean = true
     override fun isIOS(): Boolean = false
     override fun cwd(): Path = baseDir
+    override fun log(text: String) {
+        Log.d("LOG", text)
+    }
 }
 
 actual fun getPlatform(): Platform = AndroidPlatform()
