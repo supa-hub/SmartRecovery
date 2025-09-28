@@ -12,6 +12,7 @@ import com.kunto.smartrecovery.chooseDevicesPopUp.ChooseDevicesDialog
 import com.kunto.smartrecovery.currentSession.CurrentSessionPage
 import com.kunto.smartrecovery.currentSession.CurrentSessionViewModel
 import com.kunto.smartrecovery.mainPage.MainPage
+import com.kunto.smartrecovery.mainPage.MainPageViewModel
 import com.kunto.smartrecovery.newSessionName.NewSessionNamePopUp
 import com.kunto.smartrecovery.permissions.PermissionPage
 import com.kunto.smartrecovery.permissions.PermissionsViewModel
@@ -44,7 +45,10 @@ fun App() {
             startDestination = Main
         ) {
             composable<Main> {
-                MainPage(navController)
+                MainPage(
+                    viewModel { MainPageViewModel() },
+                    navController
+                )
             }
             composable<CurrentSession> {
                 CurrentSessionPage(

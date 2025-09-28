@@ -144,7 +144,6 @@ fun <T : Any> UserDataGetterDialog(viewModel: UserDataGetterViewModel, navContro
                             horizontalArrangement = Arrangement.SpaceBetween,
                         ) {
 
-
                             Text(
                                 text = stringResource(Res.string.force_perentage),
                                 modifier = Modifier

@@ -26,6 +26,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -43,6 +44,7 @@ import com.kunto.smartrecovery.Greeting
 import com.kunto.smartrecovery.UIComponents.IconButton
 import com.kunto.smartrecovery.RequestPermissions
 import com.kunto.smartrecovery.Route
+import com.kunto.smartrecovery.UIComponents.CreateGroupedBarChart
 import com.kunto.smartrecovery.UserProfileGetter
 import com.kunto.smartrecovery.oldSessions.AllSavedSessionsSideSheet
 import com.kunto.smartrecovery.oldSessions.AllSessionsViewModel
@@ -64,11 +66,12 @@ import smartrecovery.composeapp.generated.resources.train_session
 
 
 @Composable
-fun MainPage(navController: NavController, darkTheme: Boolean = isSystemInDarkTheme()) {
+fun MainPage(viewModel: MainPageViewModel, navController: NavController, darkTheme: Boolean = isSystemInDarkTheme()) {
     var showContent by remember { mutableStateOf(false) }
     val showSheet = mutableStateOf(false)
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
     val scope = rememberCoroutineScope()
+    val barData by viewModel.barData.collectAsState()
 
     val logo = when (darkTheme) {
         true -> painterResource(Res.drawable.logo_dark)
@@ -196,6 +199,7 @@ fun MainPage(navController: NavController, darkTheme: Boolean = isSystemInDarkTh
                         }
                     }
 
+                    /*
                     AnimatedVisibility(showContent) {
                         val greeting = remember { Greeting().greet() }
                         Column(
@@ -206,8 +210,9 @@ fun MainPage(navController: NavController, darkTheme: Boolean = isSystemInDarkTh
                             Text("Compose: $greeting")
                         }
                     }
+                     */
 
-                    MainGroupedBarChart()
+                    CreateGroupedBarChart(barData)
                 }
             }
             Image(
