@@ -22,7 +22,8 @@ import network.chaintech.cmpcharts.ui.barchart.config.GroupSeparatorProperties
 
 @Composable
 fun CreateGroupedBarChart(data: List<GroupBar>) {
-    val maxRange = 100
+    val maxRange = data.maxBy { it.yMax }
+        .yMax
     val groupSize = 1
     val yStepSize = 10
 

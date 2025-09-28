@@ -4,6 +4,7 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.slideIn
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOut
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -88,40 +89,58 @@ fun AllSavedSessionsSideSheet(drawerState: DrawerState, viewModel: AllSessionsVi
                         .padding(16.dp),
                     verticalArrangement = Arrangement.SpaceBetween,
                 ) {
-                    Text(
-                        text = stringResource(Res.string.your_old_sessions),
-                        style = MaterialTheme.typography.headlineSmall
-                    )
-                    //Spacer(modifier = Modifier.height(16.dp))
-                    // Add your sheet content here
-
-                    LazyColumn(
-                        state = listState
+                    Column(
+                        modifier = Modifier
+                            .width(300.dp),
+                        verticalArrangement = Arrangement.Top,
                     ) {
-                        items(allFiles) {
-                            Row(
-                                modifier = Modifier
-                                    .fillMaxWidth(),
-                                horizontalArrangement = Arrangement.SpaceEvenly,
-                            ) {
-                                var checked by remember { mutableStateOf(false) }
-                                Text(it)
-                                Checkbox(
-                                    checked = checked,
-                                    onCheckedChange = { isChecked ->
-                                        checked = isChecked
-                                        when (isChecked) {
-                                            true -> viewModel.chooseSession(it)
-                                            else -> viewModel.removeSession(it)
+                        Text(
+                            text = stringResource(Res.string.your_old_sessions),
+                            style = MaterialTheme.typography.headlineSmall
+                        )
+                        //Spacer(modifier = Modifier.height(16.dp))
+                        // Add your sheet content here
+
+                        LazyColumn(
+                            state = listState
+                        ) {
+                            items(allFiles) {
+                                Row(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .border(
+                                            width = 3.dp,
+                                            color = MaterialTheme.colorScheme.secondary,
+                                            shape = RoundedCornerShape(10.dp, 10.dp, 10.dp, 10.dp)
+                                        ),
+                                    horizontalArrangement = Arrangement.SpaceEvenly,
+                                ) {
+                                    var checked by remember { mutableStateOf(false) }
+                                    Text(
+                                        text = it
+                                            .replace("r_combined_force_", "")
+                                            .takeWhile { aChar -> aChar != '.' },
+                                        modifier = Modifier
+                                            .padding(top = 10.dp)
+                                    )
+                                    Checkbox(
+                                        checked = checked,
+                                        onCheckedChange = { isChecked ->
+                                            checked = isChecked
+                                            when (isChecked) {
+                                                true -> viewModel.chooseSession(it)
+                                                else -> viewModel.removeSession(it)
+                                            }
                                         }
-                                    }
-                                )
+                                    )
+                                }
                             }
                         }
+                        //Spacer(modifier = Modifier.height(16.dp))
                     }
-                    Spacer(modifier = Modifier.height(16.dp))
                     Column(
-                        modifier = Modifier,
+                        modifier = Modifier
+                            .width(300.dp),
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
 
@@ -156,7 +175,8 @@ fun AllSavedSessionsSideSheet(drawerState: DrawerState, viewModel: AllSessionsVi
                                                 )
                                             }
 
-                                    val sessions = convertToSessions(sessionNamesWithFileNamesWithData)
+                                    val sessions =
+                                        convertToSessions(sessionNamesWithFileNamesWithData)
                                     val payload = SessionPayload(
                                         userId = viewModel.fileHandler.getUserProfile()?.userName
                                             ?: "Could_not_find_user_profile",
