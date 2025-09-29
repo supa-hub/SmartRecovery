@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import com.kunto.smartrecovery.bluetooth.ConnectionHandler
 import com.kunto.smartrecovery.dataModels.CurrSessionDataPacket
 import com.kunto.smartrecovery.json.UserProfile
+import com.kunto.smartrecovery.theming.Blue
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -27,7 +28,7 @@ data class SessionUiState(
 class CurrentSessionViewModel(private val userProfile: UserProfile, private val connectionHandler: ConnectionHandler) : ViewModel()
 {
     private val _uiState = MutableStateFlow<SessionUiState>(SessionUiState())
-    private val _barData = MutableStateFlow<MutableList<GroupBar>>(mutableListOf())
+    private val _barData = MutableStateFlow<List<GroupBar>>(mutableListOf())
     val uiState = _uiState.asStateFlow()
     val barData = _barData.asStateFlow()
 
@@ -44,17 +45,17 @@ class CurrentSessionViewModel(private val userProfile: UserProfile, private val 
         }
 
         val data = BarData(
-            Point(
+            point = Point(
                 barData.value.size.toFloat(),
                 dataPacket.chartYValue?.toFloat() ?: 0.0f
-            )
+            ),
+            color = Blue
         )
 
         val groupBar = GroupBar(barData.value.size.toString(), listOf(data))
 
         _barData.update {
-            it += groupBar
-            it
+            it + groupBar
         }
     }
 

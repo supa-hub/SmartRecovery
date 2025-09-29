@@ -46,7 +46,7 @@ kotlin {
             implementation(libs.compose.ui.tooling.preview)
         }
         iosMain.dependencies {
-            implementation(libs.ktor.client.cio)
+            implementation(libs.ktor.client.darwin)
         }
         commonMain.dependencies {
             implementation(compose.runtime)

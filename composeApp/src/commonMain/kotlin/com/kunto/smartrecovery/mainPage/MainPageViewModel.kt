@@ -6,6 +6,7 @@ import com.kunto.smartrecovery.backend.MonthRepresentation
 import com.kunto.smartrecovery.backend.YearRepresentation
 import com.kunto.smartrecovery.backend.filehandling.FileHandler
 import com.kunto.smartrecovery.getBarDataBetween
+import com.kunto.smartrecovery.getPlatform
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -25,6 +26,7 @@ class MainPageViewModel : ViewModel()
 {
     private enum class ChartViewTypes(val dateUnit: DateTimeUnit.TimeBased)
     {
+        DAY(DateTimeUnit.TimeBased(nanoseconds = 24 * 60 * 60 * 1_000_000_000L)),
         WEEK(DateTimeUnit.TimeBased(nanoseconds = 7 * 24 * 60 * 60 * 1_000_000_000L)),
         MONTH(DateTimeUnit.TimeBased(nanoseconds = 30 * 24 * 60 * 60 * 1_000_000_000L)),
         YEAR(DateTimeUnit.TimeBased(nanoseconds = 365 * 24 * 60 * 60 * 1_000_000_000L))
@@ -34,14 +36,20 @@ class MainPageViewModel : ViewModel()
     private val _barData = MutableStateFlow<List<GroupBar>>(listOf())
     val barData = _barData.asStateFlow()
 
+    init {
+        showOneWeekActivity()
+
+    }
 
     @OptIn(ExperimentalTime::class)
     fun showOneWeekActivity(): StateFlow<List<GroupBar>>
     {
+        val colorPaletteList = getColorPaletteList1()
+
         val data = getBarDataBetween(
-            start = Clock.System.now().minus(1, ChartViewTypes.WEEK.dateUnit),
+            start = Clock.System.now().minus(6, ChartViewTypes.DAY.dateUnit),
             end = Clock.System.now(),
-            intervalType = ChartViewTypes.WEEK.dateUnit,
+            intervalType = ChartViewTypes.DAY.dateUnit,
             baseWriter = fileHandler,
             barChartMappings = mutableMapOf(),
             userWeight = 0.0,
@@ -54,7 +62,13 @@ class MainPageViewModel : ViewModel()
             },
             entryCreatingFunc = { values, previousLastX ->
                 listOf(
-                    BarData(Point(previousLastX.toFloat() + 1, values.maxOf { it[16] }.toFloat()))
+                    BarData(
+                        point = Point(
+                            previousLastX.toFloat() + 1,
+                            values.filter { it.isNotEmpty() }.maxOf { it.getOrElse(16) {"0.0"} }.toFloat()
+                        ),
+                        color = colorPaletteList.first()
+                    )
                 )
             }
         )

@@ -37,7 +37,9 @@ class AllSessionsViewModel : ViewModel()
 
     fun deleteChosen()
     {
-        chosenSessionNames.forEach { fileHandler.deleteFile(it) }
+        chosenSessionNames.forEach {
+            fileHandler.deleteAllFilesWith(it.replace("r_combined_force_", "").takeWhile { it != '.' })
+        }
         chosenSessionNames.clear()
         _allFiles.update { allSessionNames() }
     }

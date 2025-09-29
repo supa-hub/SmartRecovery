@@ -1,6 +1,7 @@
 package com.kunto.smartrecovery.json
 
 import com.kunto.smartrecovery.dataModels.files.FileSessionData
+import com.kunto.smartrecovery.getPlatform
 import kotlinx.coroutines.*
 
 
@@ -58,18 +59,20 @@ suspend fun convertToSessions(sessionNamesWithFileNamesWithData: List<FileSessio
 
 private fun convertToSensorForce(data: Collection<List<String>>): List<SensorForce>
 {
-    val res = data.drop(1).map {
-        SensorForce(
-            s0 = it[0].toInt(),
-            s1 = it[1].toInt(),
-            s2 = it[2].toInt(),
-            s3 = it[3].toInt(),
-            s4 = it[4].toInt(),
-            s5 = it[5].toInt(),
-            s6 = it[6].toInt(),
-            timeStamp_2 = it[7].toInt()
-        )
-    }
+    val res = data.drop(1)
+        .filter { it.all { it.isNotEmpty() } }
+        .map {
+            SensorForce(
+                s0 = it[0].toInt(),
+                s1 = it[1].toInt(),
+                s2 = it[2].toInt(),
+                s3 = it[3].toInt(),
+                s4 = it[4].toInt(),
+                s5 = it[5].toInt(),
+                s6 = it[6].toInt(),
+                timeStamp_2 = it[7].toInt()
+            )
+        }
     /*
     val dropped = data.drop(1)
 
@@ -91,32 +94,34 @@ private fun convertToSensorForce(data: Collection<List<String>>): List<SensorFor
 
 private fun convertToStepData(data: Collection<List<String>>): List<StepData>
 {
-    val res = data.drop(1).map {
-        StepData(
-            bluetoothAddress = it[0],
-            labelID = it[1].toInt(),
-            compIcode0 = it[2].toInt(),
-            compIcode1 = it[3].toInt(),
-            deviceId = it[4].toInt(),
-            uuid = it[5].toInt(),
-            handedness = it[6].toInt(),
-            size = it[7].toInt(),
-            eswTimeCode = it[8],
-            prodDay = it[9].toInt(),
-            prodMonth = it[10].toInt(),
-            prodYear = it[11].toInt(),
-            battery = it[12].toInt(),
-            ltsCnt = it[13].toInt(),
-            errCode = it[14].toInt(),
-            stepType = it[15].toInt(),
-            f1 = it[16].toInt(),
-            f1Time = it[17].toInt(),
-            f2 = it[18].toInt(),
-            f2Time = it[19].toInt(),
-            f3 = it[20].toInt(),
-            f3Time = it[21].toInt()
-        )
-    }
+    val res = data.drop(1)
+        .filter { it.all { it.isNotEmpty() } }
+        .map {
+            StepData(
+                bluetoothAddress = it[0],
+                labelID = it[1].toInt(),
+                compIcode0 = it[2].toInt(),
+                compIcode1 = it[3].toInt(),
+                deviceId = it[4].toInt(),
+                uuid = it[5].toInt(),
+                handedness = it[6].toInt(),
+                size = it[7].toInt(),
+                eswTimeCode = it[8],
+                prodDay = it[9].toInt(),
+                prodMonth = it[10].toInt(),
+                prodYear = it[11].toInt(),
+                battery = it[12].toInt(),
+                ltsCnt = it[13].toInt(),
+                errCode = it[14].toInt(),
+                stepType = it[15].toInt(),
+                f1 = it[16].toInt(),
+                f1Time = it[17].toInt(),
+                f2 = it[18].toInt(),
+                f2Time = it[19].toInt(),
+                f3 = it[20].toInt(),
+                f3Time = it[21].toInt()
+            )
+        }
 
     val dropped = data.drop(1)
 
@@ -125,13 +130,16 @@ private fun convertToStepData(data: Collection<List<String>>): List<StepData>
 
 private fun convertToCombinedForce(data: Collection<List<String>>): List<CombinedForce>
 {
-    val res = data.drop(1).map {
-        CombinedForce(
-            totalForce1 = it[0].toInt(),
-            totalForce2 = it[2].toInt(),
-            timeStamp_2 = it[3].toInt()
-        )
-    }
+    // data.drop(1).filter { it.isNotEmpty() }.forEach { getPlatform().log(it.toString()) }
+    val res = data.drop(1)
+        .filter { it.all { it.isNotEmpty() } }
+        .map {
+            CombinedForce(
+                totalForce1 = it.getOrElse(0){ "0" }.toInt(),
+                totalForce2 = it.getOrElse(2){ "0" }.toInt(),
+                timeStamp_2 = it.getOrElse(3){ "0" }.toInt()
+            )
+        }
 
     return res
 }

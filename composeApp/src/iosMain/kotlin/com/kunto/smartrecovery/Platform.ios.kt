@@ -11,6 +11,8 @@ import platform.Foundation.NSSearchPathForDirectoriesInDomains
 import platform.Foundation.NSDocumentDirectory
 import platform.Foundation.NSLog
 import platform.Foundation.NSUserDomainMask
+import platform.posix.fflush
+import platform.posix.stderr
 
 
 class IOSPlatform: Platform {
@@ -27,6 +29,7 @@ class IOSPlatform: Platform {
         paths.first() as String
     }.toPath(normalize = true)
 
+    @OptIn(ExperimentalForeignApi::class)
     override fun log(text: String) {
         NSLog(text)
     }

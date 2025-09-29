@@ -9,32 +9,45 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.kunto.smartrecovery.getPlatform
 import com.kunto.smartrecovery.mainPage.getColorPaletteList1
 import network.chaintech.cmpcharts.axis.AxisProperties
+import network.chaintech.cmpcharts.common.model.Point
+import network.chaintech.cmpcharts.ui.barchart.BarChart
 import network.chaintech.cmpcharts.ui.barchart.GroupBarChart
+import network.chaintech.cmpcharts.ui.barchart.config.BarChartConfig
 import network.chaintech.cmpcharts.ui.barchart.config.BarChartStyle
+import network.chaintech.cmpcharts.ui.barchart.config.BarData
 import network.chaintech.cmpcharts.ui.barchart.config.BarPlotData
 import network.chaintech.cmpcharts.ui.barchart.config.GroupBar
 import network.chaintech.cmpcharts.ui.barchart.config.GroupBarChartData
 import network.chaintech.cmpcharts.ui.barchart.config.GroupSeparatorProperties
-
+import network.chaintech.cmpcharts.ui.circularchart.model.ChartData
+import kotlin.math.roundToInt
 
 
 @Composable
 fun CreateGroupedBarChart(data: List<GroupBar>) {
-    val maxRange = data.maxBy { it.yMax }
+    val maxRange = data.ifEmpty {
+        listOf(
+            GroupBar(
+                label = "",
+                barList = listOf(BarData(Point(0.0f, 100.0f)))
+            )
+        ) }
+        .maxBy { it.yMax }
         .yMax
     val groupSize = 1
     val yStepSize = 10
 
     val xAxisProperties = AxisProperties(
-        stepSize = 30.dp,
+        stepSize = 90.dp,
         bottomPadding = 5.dp,
-        initialDrawPadding = 16.dp,
+        initialDrawPadding = 50.dp,
         lineColor = MaterialTheme.colorScheme.primary,
         labelColor = MaterialTheme.colorScheme.primary,
-        labelFontSize = 16.sp,
-        labelFormatter = { index -> index.toString() }
+        labelFontSize = 12.sp,
+        labelFormatter = { index -> data.getOrNull(index)?.label ?: "" }
     )
     val yAxisProperties = AxisProperties(
         stepCount = yStepSize,
@@ -43,15 +56,18 @@ fun CreateGroupedBarChart(data: List<GroupBar>) {
         lineColor = MaterialTheme.colorScheme.primary,
         labelColor = MaterialTheme.colorScheme.primary,
         labelFontSize = 16.sp,
-        labelFormatter = { index -> "${(index * (maxRange / yStepSize))} N" }
+        labelFormatter = { index -> "${(index * (maxRange / yStepSize)).roundToInt()} N" }
     )
 
     val colorPaletteList = getColorPaletteList1()
+
+    /*
     val groupBarPlotData = BarPlotData(
         groupBarList = data,
-        barStyle = BarChartStyle(barWidth = 35.dp, cornerRadius = 15.dp),
+        barStyle = BarChartStyle(barWidth = 50.dp, cornerRadius = 20.dp),
         barColorPaletteList = colorPaletteList
     )
+
     val groupBarChartData = GroupBarChartData(
         barPlotData = groupBarPlotData,
         xAxisProperty = xAxisProperties,
@@ -59,16 +75,39 @@ fun CreateGroupedBarChart(data: List<GroupBar>) {
         backgroundColor = MaterialTheme.colorScheme.background,
         groupSeparatorConfig = GroupSeparatorProperties(0.dp)
     )
+     */
+
+    val barChartData = BarChartConfig(
+        chartData = data.flatMapIndexed { idx, groupBar -> groupBar.barList }
+            .ifEmpty { List(size = 10) { BarData(point = Point(it.toFloat(), 0.0f), color = colorPaletteList.first()) } },
+        xAxisData = xAxisProperties,
+        yAxisData = yAxisProperties,
+        backgroundColor = MaterialTheme.colorScheme.background,
+        barStyle = BarChartStyle(
+            barWidth = 50.dp,
+            cornerRadius = 20.dp,
+        ),
+        horizontalExtraSpace = 40.dp
+    )
+
     Column(
         Modifier
             .height(480.dp)
             .width(400.dp)
             .padding(top = 30.dp)
     ) {
+        /*
         GroupBarChart(
             modifier = Modifier
                 .height(300.dp),
             groupBarChartData = groupBarChartData
+        )
+         */
+
+        BarChart(
+            modifier = Modifier
+                .height(300.dp),
+            barChartData = barChartData
         )
     }
 }

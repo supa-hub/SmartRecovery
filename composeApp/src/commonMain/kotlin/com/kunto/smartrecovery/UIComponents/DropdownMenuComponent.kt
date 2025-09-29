@@ -31,7 +31,7 @@ fun <T : Any> DropdownMenu(options: List<T>, onClick: (T) -> Unit ) {
             .padding(horizontal = 16.dp)
     ) {
         Button(
-            modifier = Modifier.width(150.dp),
+            modifier = Modifier.width(200.dp),
             onClick = { expanded = !expanded }
         ) {
             IconButton {

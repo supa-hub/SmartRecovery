@@ -113,7 +113,7 @@ fun AllSavedSessionsSideSheet(drawerState: DrawerState, viewModel: AllSessionsVi
                                             color = MaterialTheme.colorScheme.secondary,
                                             shape = RoundedCornerShape(10.dp, 10.dp, 10.dp, 10.dp)
                                         ),
-                                    horizontalArrangement = Arrangement.SpaceEvenly,
+                                    horizontalArrangement = Arrangement.SpaceBetween                            ,
                                 ) {
                                     var checked by remember { mutableStateOf(false) }
                                     Text(
@@ -121,9 +121,11 @@ fun AllSavedSessionsSideSheet(drawerState: DrawerState, viewModel: AllSessionsVi
                                             .replace("r_combined_force_", "")
                                             .takeWhile { aChar -> aChar != '.' },
                                         modifier = Modifier
-                                            .padding(top = 10.dp)
+                                            .padding(15.dp)
                                     )
                                     Checkbox(
+                                        modifier = Modifier
+                                            .padding(5.dp),
                                         checked = checked,
                                         onCheckedChange = { isChecked ->
                                             checked = isChecked
@@ -175,8 +177,7 @@ fun AllSavedSessionsSideSheet(drawerState: DrawerState, viewModel: AllSessionsVi
                                                 )
                                             }
 
-                                    val sessions =
-                                        convertToSessions(sessionNamesWithFileNamesWithData)
+                                    val sessions = convertToSessions(sessionNamesWithFileNamesWithData)
                                     val payload = SessionPayload(
                                         userId = viewModel.fileHandler.getUserProfile()?.userName
                                             ?: "Could_not_find_user_profile",

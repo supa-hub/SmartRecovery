@@ -62,6 +62,7 @@ class FileHandler
                 readUtf8()
             }
             .split("\n")
+            .drop(1)
             .map { it.split(",") }
 
 
@@ -78,7 +79,6 @@ class FileHandler
                 start <= creationDate && creationDate <= end
             }
             .map { Triple(it.name, getStringData(it.name), Instant.fromEpochMilliseconds(FileSystem.SYSTEM.metadata(it).createdAtMillis ?: 0)) }
-
     fun getFileCreationDate(fileName: String): Instant?
     {
         val millis = FileSystem.SYSTEM
@@ -98,6 +98,21 @@ class FileHandler
     {
         FileSystem.SYSTEM
             .delete(parentDir / fileDir)
+    }
+
+    fun deleteAllFilesWith(fileName: String)
+    {
+        FileSystem.SYSTEM
+            .list(parentDir)
+            .filter { it.name == fileName }
+            .forEach { FileSystem.SYSTEM.delete(it) }
+    }
+
+    fun deleteAll()
+    {
+        FileSystem.SYSTEM
+            .list(parentDir)
+            .forEach { FileSystem.SYSTEM.delete(it) }
     }
 
     @OptIn(ExperimentalSerializationApi::class)

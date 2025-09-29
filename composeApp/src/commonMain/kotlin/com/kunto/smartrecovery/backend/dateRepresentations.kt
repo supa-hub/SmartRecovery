@@ -102,11 +102,7 @@ class DayRepresentation(private val epochSecs: Int, private val day: DayOfWeek, 
 
         other as DayRepresentation
 
-        if (epochSecs != other.epochSecs) return false
-        if (dayNum != other.dayNum) return false
-        if (day != other.day) return false
-
-        return true
+        return day == other.day
     }
 }
 
