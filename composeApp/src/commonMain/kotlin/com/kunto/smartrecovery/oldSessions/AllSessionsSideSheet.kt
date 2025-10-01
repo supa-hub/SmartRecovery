@@ -147,6 +147,9 @@ fun AllSavedSessionsSideSheet(drawerState: DrawerState, viewModel: AllSessionsVi
                     ) {
 
                         Button(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .safeContentPadding(),
                             onClick = {
                                 scope.launch {
                                     val sessionNamesWithFileNamesWithData: List<FileSessionData> =

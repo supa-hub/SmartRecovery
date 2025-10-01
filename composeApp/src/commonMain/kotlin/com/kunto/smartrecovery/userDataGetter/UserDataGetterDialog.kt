@@ -37,6 +37,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.kunto.smartrecovery.UIComponents.AlertDialogTemplate
+import com.kunto.smartrecovery.UIComponents.DropdownMenu
 import com.kunto.smartrecovery.theming.Blue
 import com.kunto.smartrecovery.theming.LightBlue
 import com.kunto.smartrecovery.theming.Transparent
@@ -63,6 +64,7 @@ fun <T : Any> UserDataGetterDialog(viewModel: UserDataGetterViewModel, navContro
     var nameValue by remember { mutableStateOf(profile.userName) }
     var weightValue by remember { mutableStateOf(profile.weight.toString()) }
     var sliderPosition by remember { mutableFloatStateOf(profile.amountOfForcePercentage.toFloat()) }
+    val options = remember { listOf(0, 25, 50, 75, 100) }
 
     // create a shared interactionSource for Slider, its Label, and its thumb component
     val interactionSource = remember { MutableInteractionSource() }
@@ -129,6 +131,18 @@ fun <T : Any> UserDataGetterDialog(viewModel: UserDataGetterViewModel, navContro
                             keyboardType = KeyboardType.Number
                         )
                     )
+
+                    DropdownMenu(
+                        options,
+                        labelFormatter = {
+                            "${it} %"
+                        }
+                    ) {
+                        viewModel.updateProfile(
+                            amountOfForcePercentage = it,
+                            maximumForceOnInjury = 9.81 * profile.weight * (it.toDouble() / 100.0)
+                        )
+                    }
 
                     Column(
                         modifier = Modifier

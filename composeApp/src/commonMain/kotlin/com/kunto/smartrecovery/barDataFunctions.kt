@@ -2,15 +2,10 @@ package com.kunto.smartrecovery
 
 import com.kunto.smartrecovery.backend.DateRepresentation
 import com.kunto.smartrecovery.backend.filehandling.FileHandler
-import kotlinx.collections.immutable.toPersistentHashMap
 import kotlinx.datetime.DateTimeUnit
 import kotlinx.datetime.plus
-import network.chaintech.cmpcharts.common.model.Point
 import network.chaintech.cmpcharts.ui.barchart.config.BarData
-
 import network.chaintech.cmpcharts.ui.barchart.config.GroupBar
-import kotlin.text.compareTo
-import kotlin.time.Clock
 import kotlin.time.ExperimentalTime
 import kotlin.time.Instant
 

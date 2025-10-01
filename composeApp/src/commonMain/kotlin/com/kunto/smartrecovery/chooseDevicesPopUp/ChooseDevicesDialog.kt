@@ -73,7 +73,9 @@ fun ChooseDevicesDialog(viewModel: ChooseBLEDevicesViewModel, navController: Nav
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             LazyColumn(
-                state = listState
+                state = listState,
+                modifier = Modifier
+                    .safeContentPadding()
             ) {
                 items(listOfFoundDevices) {
                     Row(

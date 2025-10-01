@@ -23,7 +23,7 @@ import smartrecovery.composeapp.generated.resources.quick_menu
 
 
 @Composable
-fun <T : Any> DropdownMenu(options: List<T>, onClick: (T) -> Unit ) {
+fun <T : Any> DropdownMenu(options: List<T>, labelFormatter: (T) -> String = { it.toString() }, onClick: (T) -> Unit) {
     var expanded by remember { mutableStateOf(false) }
 
     Box(
@@ -48,7 +48,7 @@ fun <T : Any> DropdownMenu(options: List<T>, onClick: (T) -> Unit ) {
         ) {
             options.forEach { option ->
                 DropdownMenuItem(
-                    text = { Text(option.toString()) },
+                    text = { Text(labelFormatter(option)) },
                     onClick = {
                         onClick(option)
                         expanded = !expanded
