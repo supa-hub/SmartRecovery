@@ -76,6 +76,10 @@ class CurrentSessionViewModel(private val userProfile: UserProfile, private val 
             )
         }
 
+        _barData.update {
+            listOf()
+        }
+
         connectionHandler.disconnectAll()
     }
 }

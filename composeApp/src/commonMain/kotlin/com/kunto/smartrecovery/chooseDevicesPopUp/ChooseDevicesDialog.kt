@@ -76,6 +76,7 @@ fun ChooseDevicesDialog(viewModel: ChooseBLEDevicesViewModel, navController: Nav
                 state = listState,
                 modifier = Modifier
                     .safeContentPadding()
+                    .padding(10.dp)
             ) {
                 items(listOfFoundDevices) {
                     Row(

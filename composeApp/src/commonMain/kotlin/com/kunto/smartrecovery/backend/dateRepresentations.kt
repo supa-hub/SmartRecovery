@@ -70,7 +70,7 @@ class DayRepresentation(private val epochSecs: Int, private val day: DayOfWeek, 
 
     override fun dayValue(): Int
     {
-        return epochSecs + day.isoDayNumber * 3600 * 24 + dayNum * 3600 * 24 * 32
+        return epochSecs + day.isoDayNumber * 3600 * 24 //+ dayNum * 3600 * 24 * 32
     }
 
     override fun getPossibleDateNames(): List<String>
@@ -136,10 +136,7 @@ class MonthRepresentation(private val dayNum: Int, private val month: Month) : D
 
         other as MonthRepresentation
 
-        if (dayNum != other.dayNum) return false
-        if (month != other.month) return false
-
-        return true
+        return month == other.month
     }
 }
 
@@ -172,10 +169,6 @@ class YearRepresentation(private val dayNum: Int, private val month: Month, priv
 
         other as YearRepresentation
 
-        if (dayNum != other.dayNum) return false
-        if (year != other.year) return false
-        if (month != other.month) return false
-
-        return true
+        return year == other.year
     }
 }

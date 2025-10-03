@@ -98,8 +98,14 @@ fun CurrentSessionPage(viewModel: CurrentSessionViewModel, chosenDevicesViewMode
                 Text("Stop Session")
             }
 
-            DropdownMenu(options) {
+            DropdownMenu(
+                options,
+                labelFormatter = {
+                    "${it} %"
+                }
+            ) {
                 viewModel.updateProfile(it)
+                sliderPosition = it.toFloat()
             }
 
             Row(

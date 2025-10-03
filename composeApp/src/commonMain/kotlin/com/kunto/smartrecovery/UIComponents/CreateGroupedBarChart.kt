@@ -7,10 +7,12 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.kunto.smartrecovery.getPlatform
 import com.kunto.smartrecovery.mainPage.getColorPaletteList1
+import com.kunto.smartrecovery.theming.Transparent
 import network.chaintech.cmpcharts.axis.AxisProperties
 import network.chaintech.cmpcharts.common.model.Point
 import network.chaintech.cmpcharts.ui.barchart.BarChart
@@ -22,7 +24,9 @@ import network.chaintech.cmpcharts.ui.barchart.config.BarPlotData
 import network.chaintech.cmpcharts.ui.barchart.config.GroupBar
 import network.chaintech.cmpcharts.ui.barchart.config.GroupBarChartData
 import network.chaintech.cmpcharts.ui.barchart.config.GroupSeparatorProperties
+import network.chaintech.cmpcharts.ui.barchart.config.SelectionHighlightData
 import network.chaintech.cmpcharts.ui.circularchart.model.ChartData
+import smartrecovery.composeapp.generated.resources.Res
 import kotlin.math.roundToInt
 
 
@@ -41,13 +45,13 @@ fun CreateGroupedBarChart(data: List<GroupBar>) {
     val yStepSize = 10
 
     val xAxisProperties = AxisProperties(
-        stepSize = 90.dp,
+        stepSize = 50.dp,
         bottomPadding = 5.dp,
         initialDrawPadding = 50.dp,
         lineColor = MaterialTheme.colorScheme.primary,
         labelColor = MaterialTheme.colorScheme.primary,
         labelFontSize = 12.sp,
-        labelFormatter = { index -> data.getOrNull(index)?.label ?: "" }
+        labelFormatter = { index -> data.getOrNull(index)?.label?.take(3) ?: "" }
     )
     val yAxisProperties = AxisProperties(
         stepCount = yStepSize,
@@ -86,8 +90,15 @@ fun CreateGroupedBarChart(data: List<GroupBar>) {
         barStyle = BarChartStyle(
             barWidth = 50.dp,
             cornerRadius = 20.dp,
+            selectionHighlightData = SelectionHighlightData(
+                highlightBarColor = Transparent,
+                highlightTextColor = Transparent,
+                highlightTextTypeface = FontWeight.Bold,
+                highlightTextBackgroundColor = Transparent,
+                popUpLabel = { _, y -> "" }
+            )
         ),
-        horizontalExtraSpace = 40.dp
+        horizontalExtraSpace = 40.dp,
     )
 
     Column(

@@ -104,7 +104,10 @@ class FileHandler
     {
         FileSystem.SYSTEM
             .list(parentDir)
-            .filter { it.name == fileName }
+            .filter {
+                it.name.takeWhile { it != '.' }
+                    .takeLastWhile { it != '_' } == fileName
+            }
             .forEach { FileSystem.SYSTEM.delete(it) }
     }
 
