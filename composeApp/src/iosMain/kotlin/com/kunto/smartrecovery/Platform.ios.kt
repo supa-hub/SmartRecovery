@@ -13,6 +13,8 @@ import platform.Foundation.NSLog
 import platform.Foundation.NSUserDomainMask
 import platform.posix.fflush
 import platform.posix.stderr
+import kotlinx.datetime.DayOfWeek
+import platform.Foundation.*
 
 
 class IOSPlatform: Platform {
@@ -40,3 +42,19 @@ class IOSPlatform: Platform {
 }
 
 actual fun getPlatform(): Platform = IOSPlatform()
+
+
+actual fun DayOfWeek.localizedName(): String {
+    val formatter = NSDateFormatter().apply {
+        dateFormat = "EEEE" // full weekday name
+        locale = NSLocale.currentLocale
+    }
+
+    // Create a date corresponding to this weekday (any week works)
+    val calendar = NSCalendar.currentCalendar
+    val components = NSDateComponents()
+    components.weekday = this.ordinal.toLong() + 1 // Sunday=1 in iOS
+    val date = calendar.dateFromComponents(components)!!
+
+    return formatter.stringFromDate(date)
+}

@@ -8,6 +8,9 @@ import okio.ByteString
 import okio.ByteString.Companion.encodeUtf8
 import okio.Path
 import okio.Path.Companion.toPath
+import kotlinx.datetime.DayOfWeek
+import java.time.format.TextStyle
+import java.util.Locale
 
 
 object Constants
@@ -30,3 +33,10 @@ class AndroidPlatform : Platform {
 }
 
 actual fun getPlatform(): Platform = AndroidPlatform()
+
+
+@RequiresApi(Build.VERSION_CODES.O)
+actual fun DayOfWeek.localizedName(): String {
+    val javaDay = java.time.DayOfWeek.of(this.ordinal + 1)
+    return javaDay.getDisplayName(TextStyle.FULL, Locale.getDefault())
+}
