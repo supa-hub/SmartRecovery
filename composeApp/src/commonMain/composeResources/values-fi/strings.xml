@@ -49,4 +49,7 @@
     <string name="saturday">lauantai</string>
     <string name="sunday">sunnuntai</string>
     <string name="done">valmis</string>
+    <string name="week">viikko</string>
+    <string name="month">kuukausi</string>
+    <string name="year">vuosi</string>
 </resources>

@@ -98,7 +98,14 @@ class MainPageViewModel : ViewModel()
             },
             entryCreatingFunc = { values, previousLastX ->
                 listOf(
-                    BarData(Point(previousLastX.toFloat() + 1, values.maxOf { it[16] }.toFloat()))
+                    BarData(
+                        Point(
+                            previousLastX.toFloat() + 1,
+                            values
+                                .ifEmpty { listOf(List(17){ "0.0" }) }
+                                .maxOf { it[16] }
+                                .toFloat())
+                    )
                 )
             }
         )
@@ -128,7 +135,15 @@ class MainPageViewModel : ViewModel()
             },
             entryCreatingFunc = { values, previousLastX ->
                 listOf(
-                    BarData(Point(previousLastX.toFloat() + 1, values.maxOf { it[16] }.toFloat()))
+                    BarData(
+                        Point(
+                            previousLastX.toFloat() + 1,
+                            values
+                                .ifEmpty { listOf(List(17){ "0.0" }) }
+                                .maxOf { it[16] }
+                                .toFloat()
+                        )
+                    )
                 )
             }
         )
@@ -138,5 +153,15 @@ class MainPageViewModel : ViewModel()
         }
 
         return barData
+    }
+
+    fun showActivity(choice: String): StateFlow<List<GroupBar>>
+    {
+        return when (choice) {
+            "week" -> showOneWeekActivity()
+            "month" -> showOneMonthActivity()
+            "year" -> showOneAllActivity()
+            else -> showOneWeekActivity()
+        }
     }
 }

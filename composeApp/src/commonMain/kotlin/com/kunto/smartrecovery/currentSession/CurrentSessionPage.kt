@@ -5,12 +5,14 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeContentPadding
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -29,6 +31,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.kunto.smartrecovery.UIComponents.CreateGroupedBarChart
 import com.kunto.smartrecovery.UIComponents.DropdownMenu
@@ -98,6 +101,7 @@ fun CurrentSessionPage(viewModel: CurrentSessionViewModel, chosenDevicesViewMode
                 Text("Stop Session")
             }
 
+            /*
             DropdownMenu(
                 options,
                 labelFormatter = {
@@ -106,6 +110,29 @@ fun CurrentSessionPage(viewModel: CurrentSessionViewModel, chosenDevicesViewMode
             ) {
                 viewModel.updateProfile(it)
                 sliderPosition = it.toFloat()
+            }
+             */
+
+            Row(
+                Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 20.dp),
+                horizontalArrangement = Arrangement.SpaceBetween,
+            ) {
+                options.forEach {
+                    Button(
+                        modifier = Modifier
+                            .width(60.dp)
+                            .height(40.dp),
+                        contentPadding = PaddingValues(2.dp),
+                        onClick = {
+                            viewModel.updateProfile(it)
+                            sliderPosition = it.toFloat()
+                        }
+                    ) {
+                        Text("${it} %", fontSize = 14F.sp)
+                    }
+                }
             }
 
             Row(

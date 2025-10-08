@@ -49,4 +49,7 @@
     <string name="saturday">lördag</string>
     <string name="sunday">söndag</string>
     <string name="done">färdig</string>
+    <string name="week">vecka</string>
+    <string name="month">månad</string>
+    <string name="year">år</string>
 </resources>

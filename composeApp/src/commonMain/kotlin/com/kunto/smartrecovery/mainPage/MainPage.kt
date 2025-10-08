@@ -9,6 +9,7 @@ import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -18,27 +19,41 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarDefaults
+import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.BlendMode.Companion.Screen
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import androidx.navigation.compose.ComposeNavigator
+import androidx.navigation.compose.rememberNavController
 import com.kunto.smartrecovery.CurrentSession
 import com.kunto.smartrecovery.Greeting
 import com.kunto.smartrecovery.UIComponents.IconButton
@@ -49,10 +64,14 @@ import com.kunto.smartrecovery.UserProfileGetter
 import com.kunto.smartrecovery.oldSessions.AllSavedSessionsSideSheet
 import com.kunto.smartrecovery.oldSessions.AllSessionsViewModel
 import kotlinx.coroutines.launch
+import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.resources.vectorResource
 import smartrecovery.composeapp.generated.resources.Res
+import smartrecovery.composeapp.generated.resources._1_month
+import smartrecovery.composeapp.generated.resources._1_week
+import smartrecovery.composeapp.generated.resources.all_time
 import smartrecovery.composeapp.generated.resources.baseline_add_24
 import smartrecovery.composeapp.generated.resources.baseline_menu_24_light
 import smartrecovery.composeapp.generated.resources.compose_multiplatform
@@ -65,6 +84,12 @@ import smartrecovery.composeapp.generated.resources.test_session
 import smartrecovery.composeapp.generated.resources.train_session
 
 
+data class NavigationItem(
+    val title: String,
+    val icon: ImageVector,
+    val route: String
+)
+
 @Composable
 fun MainPage(viewModel: MainPageViewModel, navController: NavController, darkTheme: Boolean = isSystemInDarkTheme()) {
     var showContent by remember { mutableStateOf(false) }
@@ -72,6 +97,15 @@ fun MainPage(viewModel: MainPageViewModel, navController: NavController, darkThe
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
     val scope = rememberCoroutineScope()
     val barData by viewModel.barData.collectAsState()
+
+    var selectedNavigationIndex by rememberSaveable { mutableIntStateOf(0) }
+
+
+    val navBarEntries = listOf(
+        Pair("week", stringResource(Res.string._1_week)),
+        Pair("month", stringResource(Res.string._1_month)),
+        Pair("year", stringResource(Res.string.all_time))
+    )
 
     val logo = when (darkTheme) {
         true -> painterResource(Res.drawable.logo_dark)
@@ -213,7 +247,29 @@ fun MainPage(viewModel: MainPageViewModel, navController: NavController, darkThe
                      */
 
                     CreateGroupedBarChart(barData)
+
+                    NavigationBar {
+                        navBarEntries.forEachIndexed { index, pair ->
+                            NavigationBarItem(
+                                selected = selectedNavigationIndex == index,
+                                onClick = {
+                                    viewModel.showActivity(pair.first)
+                                    selectedNavigationIndex = index
+                                },
+                                icon = {
+                                    Icon(
+                                        imageVector = Icons.Default.Person, // any icon
+                                        contentDescription = null,
+                                        tint = Color.Transparent
+                                    )
+                                },
+                                label = { Text(pair.second, fontSize = 12F.sp) }
+                            )
+                        }
+                    }
+
                 }
+
             }
             Image(
                 userIcon,

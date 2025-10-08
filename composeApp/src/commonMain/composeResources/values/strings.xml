@@ -48,4 +48,7 @@
     <string name="saturday">saturday</string>
     <string name="sunday">sunday</string>
     <string name="done">done</string>
+    <string name="week">week</string>
+    <string name="month">month</string>
+    <string name="year">year</string>
 </resources>

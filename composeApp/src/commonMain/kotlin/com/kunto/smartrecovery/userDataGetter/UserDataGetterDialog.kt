@@ -5,12 +5,14 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeContentPadding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
@@ -35,6 +37,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.kunto.smartrecovery.UIComponents.AlertDialogTemplate
 import com.kunto.smartrecovery.UIComponents.DropdownMenu
@@ -132,6 +135,7 @@ fun <T : Any> UserDataGetterDialog(viewModel: UserDataGetterViewModel, navContro
                         )
                     )
 
+                    /*
                     DropdownMenu(
                         options,
                         labelFormatter = {
@@ -142,6 +146,31 @@ fun <T : Any> UserDataGetterDialog(viewModel: UserDataGetterViewModel, navContro
                             amountOfForcePercentage = it,
                             maximumForceOnInjury = 9.81 * profile.weight * (it.toDouble() / 100.0)
                         )
+                    }
+                     */
+                    Row(
+                        Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 20.dp),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                    ) {
+                        options.forEach {
+                            Button(
+                                modifier = Modifier
+                                    .width(60.dp)
+                                    .height(40.dp),
+                                contentPadding = PaddingValues(2.dp),
+                                onClick = {
+                                    viewModel.updateProfile(
+                                        amountOfForcePercentage = it,
+                                        maximumForceOnInjury = 9.81 * profile.weight * (it.toDouble() / 100.0)
+                                    )
+                                    sliderPosition = it.toFloat()
+                                }
+                            ) {
+                                Text("${it} %", fontSize = 14F.sp)
+                            }
+                        }
                     }
 
                     Column(
