@@ -1,5 +1,6 @@
 package com.kunto.smartrecovery
 
+import kotlinx.datetime.DayOfWeek
 import okio.Path
 
 interface Platform {
@@ -11,3 +12,5 @@ interface Platform {
 }
 
 expect fun getPlatform(): Platform
+
+expect fun DayOfWeek.localizedName(): String

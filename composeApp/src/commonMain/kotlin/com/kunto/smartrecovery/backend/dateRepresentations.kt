@@ -1,9 +1,30 @@
 package com.kunto.smartrecovery.backend
 
+import com.kunto.smartrecovery.localizedName
+import kotlinx.datetime.DateTimeUnit
 import kotlinx.datetime.DayOfWeek
+import kotlinx.datetime.LocalDate
 import kotlinx.datetime.Month
+import kotlinx.datetime.TimeZone
 import kotlinx.datetime.isoDayNumber
+import kotlinx.datetime.minus
 import kotlinx.datetime.number
+import kotlinx.datetime.plus
+import kotlinx.datetime.toLocalDateTime
+import kotlin.time.Clock
+import kotlin.time.ExperimentalTime
+
+
+// extension function used to get the textual representation of a day
+fun LocalDate.daysShift(days: Int): LocalDate = when {
+    days < 0 -> {
+        minus(1, DateTimeUnit.DayBased(-days))
+    }
+    days > 0 -> {
+        plus(1, DateTimeUnit.DayBased(days))
+    }
+    else -> this
+}
 
 
 interface DateRepresentation : Comparable<DateRepresentation>
@@ -63,9 +84,14 @@ class HourRepresentation(private val epochSecs: Int, private val day: DayOfWeek)
 
 class DayRepresentation(private val epochSecs: Int, private val day: DayOfWeek, private val dayNum: Int) : DateRepresentation
 {
+    @OptIn(ExperimentalTime::class)
     override fun getText(): String
     {
-        return day.name
+        val today = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault()).date
+        val firstWeekDay = today.daysShift(-DayOfWeek.entries.indexOf(today.dayOfWeek))
+        val actualDay = firstWeekDay.daysShift(day.isoDayNumber - 1)
+
+        return day.localizedName()
     }
 
     override fun dayValue(): Int
