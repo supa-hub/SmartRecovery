@@ -41,5 +41,12 @@
     <string name="injury_location">skadeplats</string>
     <string name="please_put_in_your_profile_data">Vänligen lägg in dina profildata</string>
     <string name="today">idag</string>
+    <string name="monday">måndag</string>
+    <string name="tuesday">tisdag</string>
+    <string name="wednesday">onsdag</string>
+    <string name="thursday">torsdag</string>
+    <string name="friday">fredag</string>
+    <string name="saturday">lördag</string>
+    <string name="sunday">söndag</string>
     <string name="done">färdig</string>
 </resources>

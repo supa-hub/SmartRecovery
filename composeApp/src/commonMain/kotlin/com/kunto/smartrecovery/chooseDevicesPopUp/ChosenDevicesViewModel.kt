@@ -111,6 +111,8 @@ class ChooseBLEDevicesViewModel(private val handler: ConnectionHandler, private 
                 sessionTotalSteps = totalSessionSteps
                 val currMax = it.ble.adv_force.f1
 
+                sessionMaxForce = kotlin.math.max(sessionMaxForce, currMax)
+
                 stepDataSink.write(("${it.ble}, ${it.ble.adv_force}\n").encodeUtf8())
                 currSessionAction(
                     CurrSessionDataPacket(

@@ -3,8 +3,11 @@ package com.kunto.smartrecovery.currentSession
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.lifecycle.ViewModel
+import app.lexilabs.basic.haptic.DependsOnAndroidVibratePermission
+import app.lexilabs.basic.haptic.Haptic
 import com.kunto.smartrecovery.bluetooth.ConnectionHandler
 import com.kunto.smartrecovery.dataModels.CurrSessionDataPacket
+import com.kunto.smartrecovery.getPlatform
 import com.kunto.smartrecovery.json.UserProfile
 import com.kunto.smartrecovery.theming.Blue
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -25,12 +28,15 @@ data class SessionUiState(
     val chartYValues: SnapshotStateList<Float> = mutableStateListOf()
 )
 
+@OptIn(DependsOnAndroidVibratePermission::class)
 class CurrentSessionViewModel(private val userProfile: UserProfile, private val connectionHandler: ConnectionHandler) : ViewModel()
 {
     private val _uiState = MutableStateFlow<SessionUiState>(SessionUiState())
     private val _barData = MutableStateFlow<List<GroupBar>>(mutableListOf())
     val uiState = _uiState.asStateFlow()
     val barData = _barData.asStateFlow()
+    private val hapticManager = Haptic(getPlatform() .context())
+
 
 
     fun updateValues(dataPacket: CurrSessionDataPacket)
@@ -43,6 +49,11 @@ class CurrentSessionViewModel(private val userProfile: UserProfile, private val 
                 timeSpent = dataPacket.timeSpent ?: 0
             )
         }
+
+        if ((dataPacket.maxForce ?: 0) > userProfile.maximumForceOnInjury) {
+            hapticManager.vibrate(Haptic.DEFAULTS.TICK)
+        }
+
 
         val data = BarData(
             point = Point(

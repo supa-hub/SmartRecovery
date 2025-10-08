@@ -74,6 +74,7 @@ kotlin {
             implementation(libs.kotlinx.serialization.json.okio)
             implementation(libs.kable.core)
             implementation(libs.okio)
+            implementation(libs.lexilabs.basic.haptic)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)

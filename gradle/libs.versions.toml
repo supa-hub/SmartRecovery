@@ -24,6 +24,7 @@ navigationCompose = "2.9.0-beta05"
 moko = "0.19.0"
 okio = "3.16.0"
 permissionsCompose = "0.20.0"
+haptics = "0.2.5"
 
 [libraries]
 cmpcharts = { module = "network.chaintech:cmpcharts", version.ref = "cmpcharts" }
@@ -52,6 +53,7 @@ moko-permissions = { module = "dev.icerock.moko:permissions", version.ref = "per
 moko-permissions-bluetooth = { module = "dev.icerock.moko:permissions-bluetooth", version.ref = "permissionsCompose" }
 moko-permissions-location = { module = "dev.icerock.moko:permissions-location", version.ref = "permissionsCompose" }
 okio = { module = "com.squareup.okio:okio", version.ref = "okio" }
+lexilabs-basic-haptic = { module = "app.lexilabs.basic:basic-haptic", version.ref = "haptics"}
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

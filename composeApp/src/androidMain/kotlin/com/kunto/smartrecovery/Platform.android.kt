@@ -13,6 +13,7 @@ import okio.Path.Companion.toPath
 object Constants
 {
     lateinit var baseDir: Path
+    lateinit var context: Context
 }
 
 class AndroidPlatform : Platform {
@@ -24,6 +25,8 @@ class AndroidPlatform : Platform {
     override fun log(text: String) {
         Log.d("LOG", text)
     }
+
+    override fun context(): Any = Constants.context
 }
 
 actual fun getPlatform(): Platform = AndroidPlatform()
