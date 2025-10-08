@@ -23,6 +23,8 @@ class MainActivity : ComponentActivity() {
             .toString()
             .toPath()
 
+        Constants.context = baseContext
+
         setContent {
             App()
         }

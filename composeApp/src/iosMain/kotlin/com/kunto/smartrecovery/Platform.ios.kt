@@ -35,6 +35,10 @@ class IOSPlatform: Platform {
     override fun log(text: String) {
         NSLog(text)
     }
+
+    override fun context(): Any {
+        return 0
+    }
 }
 
 actual fun getPlatform(): Platform = IOSPlatform()

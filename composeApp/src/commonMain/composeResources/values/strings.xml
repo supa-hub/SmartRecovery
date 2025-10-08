@@ -1,4 +1,4 @@
-    <resources>
+<resources>
     <string name="app_name">Smart Recovery</string>
     <string name="train_session">Train Session</string>
     <string name="test_session">Test Session</string>
@@ -40,5 +40,12 @@
     <string name="injury_location">injury location</string>
     <string name="please_put_in_your_profile_data">Please put in your profile data</string>
     <string name="today">today</string>
+    <string name="monday">monday</string>
+    <string name="tuesday">tuesday</string>
+    <string name="wednesday">wednesday</string>
+    <string name="thursday">thursday</string>
+    <string name="friday">friday</string>
+    <string name="saturday">saturday</string>
+    <string name="sunday">sunday</string>
     <string name="done">done</string>
 </resources>

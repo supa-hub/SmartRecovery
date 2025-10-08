@@ -9,6 +9,7 @@ interface Platform {
     fun isIOS(): Boolean
     fun cwd(): Path
     fun log(text: String): Unit
+    fun context(): Any
 }
 
 expect fun getPlatform(): Platform

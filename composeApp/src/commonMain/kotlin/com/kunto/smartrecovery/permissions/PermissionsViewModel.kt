@@ -47,8 +47,7 @@ class PermissionsViewModel(val permissionsController: PermissionsController) : V
     {
         if (getPlatform().isAndroid()) {
             viewModelScope.launch {
-                val auxPermissionStates =
-                    Array(permissionTypes.size) { PermissionState.NotDetermined }
+                val auxPermissionStates = Array(permissionTypes.size) { PermissionState.NotDetermined }
 
                 permissionTypes.mapIndexed { idx, perm ->
                     try {
