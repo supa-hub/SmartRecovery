@@ -49,4 +49,7 @@
     <string name="saturday">Samstag</string>
     <string name="sunday">Sonntag</string>
     <string name="done">erledigt</string>
+    <string name="week">Woche</string>
+    <string name="month">Monat</string>
+    <string name="year">Jahr</string>
 </resources>

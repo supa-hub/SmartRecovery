@@ -36,7 +36,8 @@ fun MyApplicationTheme(
             surfaceContainerHigh = backgroundColorDark,
             surfaceContainerLow = backgroundColorDark,
             inverseSurface = White,
-            background = backgroundColorDark
+            background = backgroundColorDark,
+            surfaceContainer = backgroundColorDark
         )
     } else {
         lightColorScheme(
@@ -51,7 +52,8 @@ fun MyApplicationTheme(
             surfaceContainerHigh = White,
             surfaceContainerLow = White,
             inverseSurface = backgroundColorDark,
-            background = White
+            background = White,
+            surfaceContainer = LightBlue
         )
     }
     val typography = Typography(
