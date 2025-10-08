@@ -30,6 +30,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarDefaults
 import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.NavigationBarItemColors
+import androidx.compose.material3.NavigationItemColors
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberDrawerState
@@ -63,6 +65,9 @@ import com.kunto.smartrecovery.UIComponents.CreateGroupedBarChart
 import com.kunto.smartrecovery.UserProfileGetter
 import com.kunto.smartrecovery.oldSessions.AllSavedSessionsSideSheet
 import com.kunto.smartrecovery.oldSessions.AllSessionsViewModel
+import com.kunto.smartrecovery.theming.Blue
+import com.kunto.smartrecovery.theming.LightBlue
+import com.kunto.smartrecovery.theming.backgroundColorDark
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.painterResource
@@ -227,7 +232,10 @@ fun MainPage(viewModel: MainPageViewModel, navController: NavController, darkThe
                                     modifier = Modifier.size(28.dp),
                                     tint = MaterialTheme.colorScheme.primary
                                 )
-                                Text(stringResource(Res.string.previous_sessions), fontSize = 22F.sp)
+                                Text(
+                                    stringResource(Res.string.previous_sessions),
+                                    fontSize = 22F.sp
+                                )
                                 Box(Modifier)
                             }
                         }
@@ -248,29 +256,41 @@ fun MainPage(viewModel: MainPageViewModel, navController: NavController, darkThe
 
                     CreateGroupedBarChart(barData)
 
-                    NavigationBar {
-                        navBarEntries.forEachIndexed { index, pair ->
-                            NavigationBarItem(
-                                selected = selectedNavigationIndex == index,
-                                onClick = {
-                                    viewModel.showActivity(pair.first)
-                                    selectedNavigationIndex = index
-                                },
-                                icon = {
-                                    Icon(
-                                        imageVector = Icons.Default.Person, // any icon
-                                        contentDescription = null,
-                                        tint = Color.Transparent
-                                    )
-                                },
-                                label = { Text(pair.second, fontSize = 12F.sp) }
-                            )
-                        }
-                    }
-
                 }
-
             }
+
+            NavigationBar(
+                modifier = Modifier
+                    .align(Alignment.BottomStart)
+            ) {
+                navBarEntries.forEachIndexed { index, pair ->
+                    NavigationBarItem(
+                        selected = selectedNavigationIndex == index,
+                        onClick = {
+                            viewModel.showActivity(pair.first)
+                            selectedNavigationIndex = index
+                        },
+                        colors = NavigationBarItemColors(
+                            selectedIconColor = Color.Transparent,
+                            selectedTextColor = Blue,
+                            selectedIndicatorColor = Color.Transparent,
+                            unselectedIconColor = Color.Transparent,
+                            unselectedTextColor = Blue,
+                            disabledIconColor = Color.Transparent,
+                            disabledTextColor = Color.Transparent
+                        ),
+                        icon = {
+                            Icon(
+                                imageVector = Icons.Default.Person, // any icon
+                                contentDescription = null,
+                                tint = Color.Transparent //if (darkTheme) backgroundColorDark else LightBlue
+                            )
+                        },
+                        label = { Text(pair.second, fontSize = 16F.sp) }
+                    )
+                }
+            }
+
             Image(
                 userIcon,
                 null,
@@ -286,3 +306,4 @@ fun MainPage(viewModel: MainPageViewModel, navController: NavController, darkThe
         }
     }
 }
+
