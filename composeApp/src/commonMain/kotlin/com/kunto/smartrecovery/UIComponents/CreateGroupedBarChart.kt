@@ -51,7 +51,7 @@ fun CreateGroupedBarChart(data: List<GroupBar>) {
         lineColor = MaterialTheme.colorScheme.primary,
         labelColor = MaterialTheme.colorScheme.primary,
         labelFontSize = 12.sp,
-        labelFormatter = { index -> data.getOrNull(index)?.label?.take(3) ?: "" }
+        labelFormatter = { index -> data.getOrNull(index)?.label ?: "" }
     )
     val yAxisProperties = AxisProperties(
         stepCount = yStepSize,

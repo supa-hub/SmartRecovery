@@ -65,7 +65,7 @@ class DayRepresentation(private val epochSecs: Int, private val day: DayOfWeek, 
 {
     override fun getText(): String
     {
-        return day.name
+        return day.name.take(3)
     }
 
     override fun dayValue(): Int
@@ -111,7 +111,7 @@ class MonthRepresentation(private val dayNum: Int, private val month: Month) : D
 {
     override fun getText(): String
     {
-        return "${dayNum}. ${month.name}"
+        return "${dayNum}. ${month.name.take(3)}"
     }
 
     override fun dayValue(): Int
@@ -145,7 +145,7 @@ class YearRepresentation(private val dayNum: Int, private val month: Month, priv
 {
     override fun getText(): String
     {
-        return "${month.number} ${year}"
+        return "${month.number}. ${year}"
     }
 
     override fun dayValue(): Int
