@@ -29,5 +29,3 @@ The folders contain one part of the UI and its corresponding viewmodel (viewmode
 for example, the "userDataGetter" -folder contains the popup dialog for inserting the users name etc.m while also containing "UserDataGetterViewModel" <br />
 for handling the inputs which the user gives, it also contain "DatePickerComposable", which contains a UI component for showing and choosing
 dates from a calendar. <br />
-
-The only big feature that needs to still be implemented is adding the data to the barcharts. Currently the app generates dummy data to show on the barcharts.
