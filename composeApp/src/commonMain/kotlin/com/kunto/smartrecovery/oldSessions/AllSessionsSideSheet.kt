@@ -161,20 +161,17 @@ fun AllSavedSessionsSideSheet(drawerState: DrawerState, viewModel: AllSessionsVi
                                             .map { name ->
                                                 FileSessionData(
                                                     sessionName = name,
-                                                    sessionCreationDate = viewModel.fileHandler.getFileCreationDate(
-                                                        "r_combined_force_${name}.csv"
-                                                    )
+                                                    sessionCreationDate = viewModel.fileHandler
+                                                        .getFileCreationDate("r_combined_force_${name}.csv")
                                                         ?.format(DateTimeComponents.Formats.ISO_DATE_TIME_OFFSET)
                                                         ?: "",
-                                                    fileData = viewModel.fileHandler.allFileNamesWithString(
-                                                        "_${name}.csv"
-                                                    )
+                                                    fileData = viewModel.fileHandler
+                                                        .allFileNamesWithString("_${name}.csv")
                                                         .map {
                                                             FileData(
                                                                 it,
-                                                                viewModel.fileHandler.getStringData(
-                                                                    it
-                                                                )
+                                                                viewModel.fileHandler
+                                                                    .getStringData(it)
                                                             )
                                                         }
                                                 )
@@ -182,7 +179,9 @@ fun AllSavedSessionsSideSheet(drawerState: DrawerState, viewModel: AllSessionsVi
 
                                     val sessions = convertToSessions(sessionNamesWithFileNamesWithData)
                                     val payload = SessionPayload(
-                                        userId = viewModel.fileHandler.getUserProfile()?.userName
+                                        userId = viewModel.fileHandler
+                                            .getUserProfile()
+                                            ?.userName
                                             ?: "Could_not_find_user_profile",
                                         sessionsCount = sessions.size,
                                         sessions = sessions

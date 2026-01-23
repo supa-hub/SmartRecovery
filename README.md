@@ -1,4 +1,10 @@
-This is a Kotlin Multiplatform project targeting Android, iOS.
+# Introduction
+This is a Kotlin Multiplatform app targeting Android, iOS.
+The app receives force data from pressure sensors using a bluetooth connection and
+transferring the data through HTTP requests to a backend server.
+
+The backend server is at:
+
 
 * [/composeApp](./composeApp/src) is for code that will be shared across your Compose Multiplatform applications.
   It contains several subfolders:
@@ -14,7 +20,7 @@ This is a Kotlin Multiplatform project targeting Android, iOS.
 
   
 # App structure
-Most of the code is in the composeApp/src/commonMain -folder and tested to work for both Android and iOS. <br />
+Most of the code is in the /composeApp/src/commonMain -folder and tested to work for both Android and iOS. <br />
 
 The App uses Androids new <UI to backend> structure called model-view-viewmodel (mvvm). <br />
 
