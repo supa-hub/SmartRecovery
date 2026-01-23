@@ -3,7 +3,7 @@ This is a Kotlin Multiplatform app targeting Android, iOS.
 The app receives force data from pressure sensors using a bluetooth connection and
 transferring the data through HTTP requests to a backend server.
 
-The backend server is at: ** https://github.com/supa-hub/smartrecovery_backend **
+The backend server is at: https://github.com/supa-hub/smartrecovery_backend 
 
 
 * [/composeApp](./composeApp/src) is for code that will be shared across your Compose Multiplatform applications.
