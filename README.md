@@ -24,8 +24,8 @@ Most of the code is in the /composeApp/src/commonMain -folder and tested to work
 
 The App uses Androids new <UI to backend> structure called model-view-viewmodel (mvvm). <br />
 
-The folders contain one part of the UI and its corresponding viewmodel (viewmodel is the UI components backend, which handles data etc.). <br />
+The folders inside /composeApp/src/commonMain contain part of the UI and its corresponding viewmodel (viewmodel is the UI components backend, which handles data etc.). <br />
 
-for example, the "userDataGetter" -folder contains the popup dialog for inserting the users name etc.m while also containing "UserDataGetterViewModel" <br />
-for handling the inputs which the user gives, it also contain "DatePickerComposable", which contains a UI component for showing and choosing
+For example, the **userDataGetter** -folder contains the popup dialog for inserting the users name etc. while also containing "UserDataGetterViewModel" <br />
+For handling the inputs which the user gives, it also contain "DatePickerComposable", which contains a UI component for showing and choosing
 dates from a calendar. <br />
