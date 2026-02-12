@@ -89,12 +89,6 @@ import smartrecovery.composeapp.generated.resources.test_session
 import smartrecovery.composeapp.generated.resources.train_session
 
 
-data class NavigationItem(
-    val title: String,
-    val icon: ImageVector,
-    val route: String
-)
-
 @Composable
 fun MainPage(viewModel: MainPageViewModel, navController: NavController, darkTheme: Boolean = isSystemInDarkTheme()) {
     var showContent by remember { mutableStateOf(false) }

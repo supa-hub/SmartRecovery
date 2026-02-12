@@ -26,6 +26,10 @@ import dev.icerock.moko.permissions.compose.rememberPermissionsControllerFactory
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 
+/**
+ * Handles the navigation between windows in the app.
+ * Also is the entry point for the app.
+ */
 @Composable
 @Preview
 fun App() {
@@ -40,6 +44,10 @@ fun App() {
         val userProfile by viewModel { UserDataGetterViewModel() }.profile.collectAsState()
         val currSession = viewModel { CurrentSessionViewModel(userProfile, handler) }
 
+        /*
+         * Uses the standard Kotlin multiplatform navigation style.
+         * You can read more about it here: https://kotlinlang.org/docs/multiplatform/compose-navigation.html#basic-navigation-example
+         */
         NavHost(
             navController = navController,
             startDestination = Main

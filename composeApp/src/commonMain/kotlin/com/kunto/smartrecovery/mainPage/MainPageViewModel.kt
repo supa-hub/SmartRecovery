@@ -65,7 +65,11 @@ class MainPageViewModel : ViewModel()
                     BarData(
                         point = Point(
                             previousLastX.toFloat() + 1,
-                            values.filter { it.isNotEmpty() }.maxOf { it.getOrElse(16) {"0.0"} }.toFloat()
+                            values
+                                .filter { it.isNotEmpty() }
+                                .maxOfOrNull { it.getOrElse(16) {"0.0"} }
+                                ?.toFloat()
+                                ?: 0.0f
                         ),
                         color = colorPaletteList.first()
                     )
@@ -83,6 +87,8 @@ class MainPageViewModel : ViewModel()
     @OptIn(ExperimentalTime::class)
     fun showOneMonthActivity(): StateFlow<List<GroupBar>>
     {
+        val colorPaletteList = getColorPaletteList1()
+
         val data = getBarDataBetween(
             start = Clock.System.now().minus(1, ChartViewTypes.MONTH.dateUnit),
             end = Clock.System.now(),
@@ -102,9 +108,12 @@ class MainPageViewModel : ViewModel()
                         Point(
                             previousLastX.toFloat() + 1,
                             values
-                                .ifEmpty { listOf(List(17){ "0.0" }) }
-                                .maxOf { it[16] }
-                                .toFloat())
+                                .filter { it.isNotEmpty() }
+                                .maxOfOrNull { it.getOrElse(16) {"0.0"} }
+                                ?.toFloat()
+                                ?: 0.0f
+                        ),
+                        color = colorPaletteList.first()
                     )
                 )
             }
@@ -120,6 +129,8 @@ class MainPageViewModel : ViewModel()
     @OptIn(ExperimentalTime::class)
     fun showOneAllActivity(): StateFlow<List<GroupBar>>
     {
+        val colorPaletteList = getColorPaletteList1()
+
         val data = getBarDataBetween(
             start = Clock.System.now().minus(1, ChartViewTypes.YEAR.dateUnit),
             end = Clock.System.now(),
@@ -139,10 +150,12 @@ class MainPageViewModel : ViewModel()
                         Point(
                             previousLastX.toFloat() + 1,
                             values
-                                .ifEmpty { listOf(List(17){ "0.0" }) }
-                                .maxOf { it[16] }
-                                .toFloat()
-                        )
+                                .filter { it.isNotEmpty() }
+                                .maxOfOrNull { it.getOrElse(16) {"0.0"} }
+                                ?.toFloat()
+                                ?: 0.0f
+                        ),
+                        color = colorPaletteList.first()
                     )
                 )
             }

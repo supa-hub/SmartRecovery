@@ -29,6 +29,10 @@ import kotlin.uuid.ExperimentalUuidApi
 import kotlin.uuid.Uuid
 
 
+/**
+ * Can be used to transport relevant data and operations related to bluetooth
+ * to different viewmodels.
+ */
 @OptIn(ExperimentalUuidApi::class, ExperimentalApi::class)
 class ConnectionHandler {
     companion object {

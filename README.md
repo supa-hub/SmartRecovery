@@ -29,3 +29,12 @@ The folders inside /composeApp/src/commonMain contain part of the UI and its cor
 For example, the **userDataGetter** -folder contains the popup dialog for inserting the users name etc. while also containing "UserDataGetterViewModel" <br />
 For handling the inputs which the user gives, it also contain "DatePickerComposable", which contains a UI component for showing and choosing
 dates from a calendar. <br />
+
+
+
+# Running the app
+The easiest way to run the app is by downloading Android studio and running it from there. <br />
+Android studio also works for iOS builds, if you're using a Mac.
+
+If you want to tst the bluetooth or internet features, you'll have to connect a mobile phone to your
+compure/Android studio and run the app on the phone.

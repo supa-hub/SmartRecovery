@@ -25,7 +25,7 @@ fun getBarDataBetween(
 ): List<GroupBar>
 {
     try {
-        val values = baseWriter.filesWithDateInRange("r_step_data_", start, end)
+        val values = baseWriter.filesWithDateInRange("r_step_data", start, end)
             .groupBy { groupingFunc(it.third) }
             .map { Pair(it.key, it.value.filter { aValue -> aValue.second.isNotEmpty() }) }
             .toMap()
@@ -97,7 +97,6 @@ fun getBarDataBetween(
         }
     }
     catch (e: Exception) {
-
     }
     return listOf()
 }
