@@ -1,4 +1,4 @@
-package com.kunto.smartrecovery.currentSession
+package com.kunto.smartrecovery.pages.currentSession
 
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.snapshots.SnapshotStateList
@@ -13,7 +13,6 @@ import com.kunto.smartrecovery.theming.Blue
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
-import network.chaintech.cmpcharts.common.extensions.formatNumber
 import network.chaintech.cmpcharts.common.model.Point
 import network.chaintech.cmpcharts.ui.barchart.config.BarData
 import network.chaintech.cmpcharts.ui.barchart.config.GroupBar

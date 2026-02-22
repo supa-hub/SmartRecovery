@@ -1,4 +1,4 @@
-package com.kunto.smartrecovery.newSessionName
+package com.kunto.smartrecovery.pages.newSessionName
 
 
 import androidx.compose.foundation.background

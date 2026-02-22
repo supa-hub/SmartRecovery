@@ -1,4 +1,4 @@
-package com.kunto.smartrecovery.mainPage
+package com.kunto.smartrecovery.pages.mainPage
 
 import androidx.lifecycle.ViewModel
 import com.kunto.smartrecovery.backend.DayRepresentation
@@ -6,7 +6,6 @@ import com.kunto.smartrecovery.backend.MonthRepresentation
 import com.kunto.smartrecovery.backend.YearRepresentation
 import com.kunto.smartrecovery.backend.filehandling.FileHandler
 import com.kunto.smartrecovery.getBarDataBetween
-import com.kunto.smartrecovery.getPlatform
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow

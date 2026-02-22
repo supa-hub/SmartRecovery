@@ -1,4 +1,4 @@
-package com.kunto.smartrecovery.currentSession
+package com.kunto.smartrecovery.pages.currentSession
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -34,9 +34,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.kunto.smartrecovery.UIComponents.CreateGroupedBarChart
-import com.kunto.smartrecovery.UIComponents.DropdownMenu
 import com.kunto.smartrecovery.Main
-import com.kunto.smartrecovery.chooseDevicesPopUp.ChooseBLEDevicesViewModel
+import com.kunto.smartrecovery.pages.chooseDevicesPopUp.ChooseBLEDevicesViewModel
 import com.kunto.smartrecovery.theming.Blue
 import com.kunto.smartrecovery.theming.LightBlue
 import com.kunto.smartrecovery.theming.Transparent

@@ -1,4 +1,4 @@
-package com.kunto.smartrecovery.oldSessions
+package com.kunto.smartrecovery.pages.oldSessions
 
 import androidx.compose.runtime.collectAsState
 import androidx.lifecycle.ViewModel

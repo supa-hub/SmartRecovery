@@ -10,23 +10,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.kunto.smartrecovery.getPlatform
-import com.kunto.smartrecovery.mainPage.getColorPaletteList1
+import com.kunto.smartrecovery.pages.mainPage.getColorPaletteList1
 import com.kunto.smartrecovery.theming.Transparent
 import network.chaintech.cmpcharts.axis.AxisProperties
 import network.chaintech.cmpcharts.common.model.Point
 import network.chaintech.cmpcharts.ui.barchart.BarChart
-import network.chaintech.cmpcharts.ui.barchart.GroupBarChart
 import network.chaintech.cmpcharts.ui.barchart.config.BarChartConfig
 import network.chaintech.cmpcharts.ui.barchart.config.BarChartStyle
 import network.chaintech.cmpcharts.ui.barchart.config.BarData
-import network.chaintech.cmpcharts.ui.barchart.config.BarPlotData
 import network.chaintech.cmpcharts.ui.barchart.config.GroupBar
-import network.chaintech.cmpcharts.ui.barchart.config.GroupBarChartData
-import network.chaintech.cmpcharts.ui.barchart.config.GroupSeparatorProperties
 import network.chaintech.cmpcharts.ui.barchart.config.SelectionHighlightData
-import network.chaintech.cmpcharts.ui.circularchart.model.ChartData
-import smartrecovery.composeapp.generated.resources.Res
 import kotlin.math.roundToInt
 
 

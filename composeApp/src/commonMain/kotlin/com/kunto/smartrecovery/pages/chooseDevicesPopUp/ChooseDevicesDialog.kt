@@ -1,4 +1,4 @@
-package com.kunto.smartrecovery.chooseDevicesPopUp
+package com.kunto.smartrecovery.pages.chooseDevicesPopUp
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border

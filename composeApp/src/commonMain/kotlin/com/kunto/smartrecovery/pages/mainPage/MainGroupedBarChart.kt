@@ -1,6 +1,5 @@
-package com.kunto.smartrecovery.mainPage
+package com.kunto.smartrecovery.pages.mainPage
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -8,28 +7,16 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.input.key.onKeyEvent
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.kunto.smartrecovery.theming.Black
-import com.kunto.smartrecovery.theming.Blue
-import com.kunto.smartrecovery.theming.backgroundColorDark
-import network.chaintech.cmpcharts.axis.AxisConfiguration
-import network.chaintech.cmpcharts.common.components.Legends
 import network.chaintech.cmpcharts.common.model.LegendsConfig
 import network.chaintech.cmpcharts.ui.barchart.GroupBarChart
 import network.chaintech.cmpcharts.ui.barchart.config.BarChartStyle
 import network.chaintech.cmpcharts.ui.barchart.config.BarPlotData
 import network.chaintech.cmpcharts.ui.barchart.config.GroupBarChartData
 import network.chaintech.cmpcharts.ui.barchart.config.GroupSeparatorProperties
-import org.jetbrains.compose.resources.Font
 import network.chaintech.cmpcharts.axis.AxisProperties
-import network.chaintech.cmpcharts.axis.Gravity
-import network.chaintech.cmpcharts.common.model.AxisConfig
-import smartrecovery.composeapp.generated.resources.Res
 
 
 @Composable

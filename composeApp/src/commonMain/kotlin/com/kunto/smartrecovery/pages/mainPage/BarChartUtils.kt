@@ -1,4 +1,4 @@
-package com.kunto.smartrecovery.mainPage
+package com.kunto.smartrecovery.pages.mainPage
 
 import androidx.compose.ui.graphics.Color
 import com.kunto.smartrecovery.theming.Blue

@@ -1,4 +1,4 @@
-package com.kunto.smartrecovery.permissions
+package com.kunto.smartrecovery.pages.permissions
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

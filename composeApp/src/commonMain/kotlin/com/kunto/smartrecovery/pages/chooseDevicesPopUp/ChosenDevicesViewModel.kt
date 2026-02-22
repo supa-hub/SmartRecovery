@@ -1,8 +1,6 @@
-package com.kunto.smartrecovery.chooseDevicesPopUp
+package com.kunto.smartrecovery.pages.chooseDevicesPopUp
 
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.mutableStateSetOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.testing_2.backend.bluetoothDecoding.adv
@@ -15,27 +13,21 @@ import com.juul.kable.Peripheral
 import com.juul.kable.PlatformAdvertisement
 import com.kunto.smartrecovery.backend.filehandling.FileHandler
 import com.kunto.smartrecovery.bluetooth.ConnectionHandler
-import com.kunto.smartrecovery.currentSession.CurrentSessionViewModel
 import com.kunto.smartrecovery.dataModels.CurrSessionDataPacket
 import com.kunto.smartrecovery.getPlatform
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Deferred
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.async
-import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.launch
-import kotlinx.io.bytestring.hexToByteString
-import okio.Buffer
-import okio.BufferedSink
-import okio.ByteString
 import okio.ByteString.Companion.encodeUtf8
 import okio.FileSystem
 import okio.Path.Companion.toPath
 import okio.SYSTEM
 import okio.buffer
+import kotlin.math.max
+import kotlin.uuid.ExperimentalUuidApi
 
-@OptIn(kotlin.uuid.ExperimentalUuidApi::class)
+@OptIn(ExperimentalUuidApi::class)
 class ChooseBLEDevicesViewModel(private val handler: ConnectionHandler, private val currSessionAction: (CurrSessionDataPacket) -> Unit) : ViewModel()
 {
     companion object {
@@ -111,7 +103,7 @@ class ChooseBLEDevicesViewModel(private val handler: ConnectionHandler, private 
                 sessionTotalSteps = totalSessionSteps
                 val currMax = it.ble.adv_force.f1
 
-                sessionMaxForce = kotlin.math.max(sessionMaxForce, currMax)
+                sessionMaxForce = max(sessionMaxForce, currMax)
 
                 stepDataSink.write(("${it.ble}, ${it.ble.adv_force}\n").encodeUtf8())
                 currSessionAction(
